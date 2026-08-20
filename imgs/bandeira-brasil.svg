@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 504" width="720" height="504">
+  <rect width="720" height="504" fill="#009739"/>
+  <polygon points="360,50 670,252 360,454 50,252" fill="#FEDD00"/>
+  <circle cx="360" cy="252" r="110" fill="#012169"/>
+  <path d="M 250 200 A 160 160 0 0 1 470 200" stroke="#FFFFFF" stroke-width="14" fill="none"/>
+  <text x="360" y="180" font-family="Georgia, serif" font-size="26" fill="#FFFFFF" text-anchor="middle" font-style="italic">ORDEM E PROGRESSO</text>
+  <g fill="#FFFFFF">
+    <circle cx="300" cy="300" r="3"/><circle cx="330" cy="280" r="3"/><circle cx="360" cy="270" r="4"/>
+    <circle cx="390" cy="280" r="3"/><circle cx="420" cy="300" r="3"/><circle cx="340" cy="320" r="3"/>
+    <circle cx="380" cy="320" r="3"/><circle cx="360" cy="340" r="3"/><circle cx="310" cy="330" r="2.5"/>
+    <circle cx="410" cy="330" r="2.5"/>
+  </g>
+</svg>
