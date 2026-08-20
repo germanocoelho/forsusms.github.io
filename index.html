@@ -104,7 +104,25 @@ img{max-width:100%}
 .fs-friso svg{ display:block; width:100%; height:22px; }
 
 /* ===== NAVEGACAO ===== */
-.nav{position:fixed; top:0; left:0; right:0; z-index:100; padding:16px 0; transition:.3s}
+.nav{position:fixed; top:30px; left:0; right:0; z-index:100; padding:16px 0; transition:.3s}
+
+/* ===== PLACA CLARA PARA A LOGO EM FUNDO ESCURO (o texto "For/SUS" e escuro demais para ficar sobre azul-marinho sem isso) ===== */
+.logo-placa{
+  display:inline-block; background:linear-gradient(180deg,#FDFBF6,#F3EEE2); border-radius:22px;
+  padding:16px 26px; box-shadow:0 18px 40px -14px rgba(0,0,0,.45), 0 0 0 1px rgba(212,167,44,.25);
+}
+.logo-placa img{display:block}
+
+/* ===== BARRA DE CREDITOS (mesmo padrao do ICET/FOCAMS/COOPIMS) ===== */
+.topbar-creditos{position:fixed; top:0; left:0; right:0; z-index:101; height:30px; background:#061826; display:flex; align-items:center; justify-content:center; border-bottom:1px solid rgba(255,255,255,.08)}
+.topbar-creditos-wrap{display:flex; align-items:center; gap:14px}
+.badge-logo-link{position:relative; display:inline-flex; align-items:center; text-decoration:none}
+.badge-logo{width:20px; height:20px; border-radius:50%; object-fit:contain; background:#fff; padding:1px; transition:transform .25s ease}
+.badge-logo-link:hover .badge-logo{transform:scale(1.18)}
+.badge-tooltip{position:absolute; top:130%; left:50%; transform:translateX(-50%); z-index:5; background:#F3EEE2; color:#0C1F2B; font-family:'Inter',sans-serif; font-size:.68rem; line-height:1.4; padding:.5rem .7rem; border-radius:8px; box-shadow:0 10px 24px rgba(0,0,0,.35); width:215px; text-align:left; opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease}
+.badge-logo-link:hover .badge-tooltip{opacity:1; transform:translateX(-50%) translateY(4px)}
+@media(max-width:640px){.badge-tooltip{width:170px; font-size:.64rem}}
+
 .nav.scrolled{background:rgba(11,61,99,.95); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); padding:11px 0; box-shadow:0 8px 30px -12px rgba(0,0,0,.4)}
 .nav-inner{display:flex; align-items:center; justify-content:space-between}
 .nav-brand{display:flex; align-items:center; gap:10px}
@@ -115,8 +133,11 @@ img{max-width:100%}
 .nav-links a{color:rgba(255,255,255,.86); font-size:.92rem; font-weight:600; transition:.2s}
 .nav-links a:hover{color:var(--dourado-claro)}
 .nav-cta{padding:11px 22px !important}
-.burger{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px}
-.burger span{width:24px;height:2px;background:#fff;border-radius:2px}
+.burger{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px; position:relative; z-index:120}
+.burger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:.3s;transform-origin:center}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 @media(max-width:920px){
   .nav-links{position:fixed; top:0; right:-100%; width:78%; max-width:320px; height:100vh; background:var(--azul); flex-direction:column; justify-content:center; align-items:flex-start; padding:40px; transition:.35s; gap:22px}
   .nav-links.open{right:0}
@@ -209,6 +230,19 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
 </head>
 <body>
 
+<div class="topbar-creditos">
+  <div class="topbar-creditos-wrap">
+    <a class="badge-logo-link" href="https://www.vertticonsultoria.com.br" target="_blank" rel="noopener">
+      <img class="badge-logo" src="imgs/credito-vertti.png" alt="VERTTI Consultoria">
+      <span class="badge-tooltip">Site criado por <strong>VERTTI Consultoria</strong> (Germano Coelho Ramos Rocha-Silva). Clique para conhecer.</span>
+    </a>
+    <a class="badge-logo-link" href="https://institutocaciqueenirterena.github.io" target="_blank" rel="noopener">
+      <img class="badge-logo" src="imgs/credito-icet.png" alt="Instituto Cacique Enir Terena">
+      <span class="badge-tooltip">Em parceria com o <strong>Instituto Cacique Enir Terena (ICET)</strong>, presidido por Maria Auxiliadora Bezerra. Clique para conhecer.</span>
+    </a>
+  </div>
+</div>
+
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="fs-grafismo" viewBox="0 0 200 200">
     <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -255,7 +289,9 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
 <section class="hero" id="top">
   <canvas id="fs-particulas"></canvas>
   <div class="wrap hero-conteudo">
-    <img src="imgs/forsus-logo-completa.png" alt="ForSUS/MS" style="height:170px;display:block;margin:0 auto 18px;position:relative;z-index:2">
+    <div class="logo-placa" style="margin:0 auto 18px">
+      <img src="imgs/forsus-logo-completa.png" alt="ForSUS/MS" style="height:150px">
+    </div>
     <div class="faixa-bandeiras">
       <img class="bandeira" alt="Bandeira do Brasil" src="imgs/bandeira-brasil.svg" style="width:40px">
       <img class="bandeira" alt="Bandeira de Mato Grosso do Sul" src="imgs/bandeira-ms.svg" style="width:40px">
@@ -512,7 +548,9 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
 <footer id="contato">
   <div class="wrap footer-grid">
     <div>
-      <img src="imgs/forsus-logo-completa.png" alt="ForSUS/MS" style="height:120px;display:block;margin-bottom:16px">
+      <div class="logo-placa" style="margin-bottom:16px">
+        <img src="imgs/forsus-logo-completa.png" alt="ForSUS/MS" style="height:100px">
+      </div>
       <p style="color:rgba(255,255,255,.65); font-size:.88rem; max-width:320px">Fórum Permanente das Entidades, Instituições e Movimentos Sociais representativos de Usuárias e Usuários do SUS de Mato Grosso do Sul.</p>
       <div style="display:flex; gap:10px; margin-top:16px">
         <img src="imgs/bandeira-brasil.svg" alt="Brasil" style="width:32px;border-radius:3px">
@@ -538,6 +576,7 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
   </div>
   <div class="foot-bottom">
     ForSUS/MS · Fórum Permanente dos Usuários do SUS de Mato Grosso do Sul · Campo Grande/MS
+    <br>Site desenvolvido por <strong style="color:rgba(255,255,255,.75)">Germano Coelho Ramos Rocha-Silva</strong> — Mestre em Propriedade Intelectual e Transferência de Tecnologia para Inovação · <strong style="color:rgba(255,255,255,.75)">VERTTI Consultoria</strong>, em parceria com o <strong style="color:rgba(255,255,255,.75)">Instituto Cacique Enir Terena (ICET)</strong>, presidido por <strong style="color:rgba(255,255,255,.75)">Maria Auxiliadora Bezerra</strong>.
     <br><span style="opacity:.6">Este projeto é protegido pela Lei nº 9.610/1998 (Lei de Direitos Autorais).</span>
   </div>
 </footer>
@@ -554,9 +593,9 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
   window.addEventListener('scroll', function(){
     if (window.scrollY > 40) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
   });
-  if (burger) burger.addEventListener('click', function(){ links.classList.toggle('open'); });
+  if (burger) burger.addEventListener('click', function(){ links.classList.toggle('open'); burger.classList.toggle('open'); });
   document.querySelectorAll('#navlinks a').forEach(function(a){
-    a.addEventListener('click', function(){ links.classList.remove('open'); });
+    a.addEventListener('click', function(){ links.classList.remove('open'); burger.classList.remove('open'); });
   });
 
   // ===== REVEAL ao rolar =====
