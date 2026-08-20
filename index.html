@@ -108,7 +108,7 @@ img{max-width:100%}
 .nav.scrolled{background:rgba(11,61,99,.95); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); padding:11px 0; box-shadow:0 8px 30px -12px rgba(0,0,0,.4)}
 .nav-inner{display:flex; align-items:center; justify-content:space-between}
 .nav-brand{display:flex; align-items:center; gap:10px}
-.nav-brand-mark{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--dourado),var(--dourado-claro));color:var(--azul);display:flex;align-items:center;justify-content:center;font-weight:800;font-family:'Fraunces',serif;font-size:1.05rem}
+.nav-brand-mark{width:44px;height:44px;object-fit:contain}
 .nav-brand-txt{font-family:'Fraunces',serif;font-weight:700;font-size:1.2rem;color:var(--branco)}
 .nav-brand-txt b{color:var(--dourado-claro)}
 .nav-links{display:flex; align-items:center; gap:26px}
@@ -235,7 +235,7 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
     <a href="#top" class="nav-brand">
-      <span class="nav-brand-mark">FS</span>
+      <img class="nav-brand-mark" src="imgs/forsus-emblema.png" alt="ForSUS/MS">
       <span class="nav-brand-txt">ForSUS<b>/MS</b></span>
     </a>
     <nav class="nav-links" id="navlinks">
@@ -255,6 +255,7 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
 <section class="hero" id="top">
   <canvas id="fs-particulas"></canvas>
   <div class="wrap hero-conteudo">
+    <img src="imgs/forsus-logo-completa.png" alt="ForSUS/MS" style="height:170px;display:block;margin:0 auto 18px;position:relative;z-index:2">
     <div class="faixa-bandeiras">
       <img class="bandeira" alt="Bandeira do Brasil" src="imgs/bandeira-brasil.svg" style="width:40px">
       <img class="bandeira" alt="Bandeira de Mato Grosso do Sul" src="imgs/bandeira-ms.svg" style="width:40px">
@@ -511,10 +512,7 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
 <footer id="contato">
   <div class="wrap footer-grid">
     <div>
-      <div class="nav-brand" style="margin-bottom:14px">
-        <span class="nav-brand-mark">FS</span>
-        <span class="nav-brand-txt" style="color:var(--branco)">ForSUS<b style="color:var(--dourado-claro)">/MS</b></span>
-      </div>
+      <img src="imgs/forsus-logo-completa.png" alt="ForSUS/MS" style="height:120px;display:block;margin-bottom:16px">
       <p style="color:rgba(255,255,255,.65); font-size:.88rem; max-width:320px">Fórum Permanente das Entidades, Instituições e Movimentos Sociais representativos de Usuárias e Usuários do SUS de Mato Grosso do Sul.</p>
       <div style="display:flex; gap:10px; margin-top:16px">
         <img src="imgs/bandeira-brasil.svg" alt="Brasil" style="width:32px;border-radius:3px">
