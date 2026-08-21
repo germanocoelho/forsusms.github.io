@@ -550,6 +550,7 @@ body.adm-ok .mb-acoes { display:flex; }
   <div class="topo-adm">
     <div class="wrap-adm" style="display:flex;align-items:center;justify-content:space-between;width:100%">
       <div class="marca"><img src="imgs/forsus-emblema.png" alt="ForSUS/MS"><b>Painel Administrativo — ForSUS/MS</b></div>
+      <button class="sair" onclick="admTrocarToken()" style="margin-right:10px">🔑 Trocar token do GitHub</button>
       <button class="sair" onclick="location.reload()">Sair</button>
     </div>
   </div>
@@ -5826,6 +5827,15 @@ function admLogin(){
     err.style.display = 'block';
     document.getElementById('adm-pw').value = '';
   }
+}
+function admTrocarToken(){
+  var t = prompt('Cole o NOVO token do GitHub (fica salvo so neste navegador, nunca no codigo do site):') || '';
+  t = t.replace(/[^A-Za-z0-9_]/g, '');
+  if (!t) { notif('Nenhum token informado — nada foi alterado.'); return; }
+  localStorage.setItem('forsus_gh_token', t);
+  GH_TOKEN = t;
+  notif('🔑 Token atualizado! Verificando conexão...');
+  admVerificarConexaoGitHub();
 }
 </script>
 </body>
