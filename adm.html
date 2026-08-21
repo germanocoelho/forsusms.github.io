@@ -1298,7 +1298,12 @@ var DB_KEY = 'cmddi_db_v3';
 var GH_OWNER = 'germanocoelho';
 var GH_REPO = 'forsusms.github.io';
 var GH_FILE = 'dados.json';
-var GH_TOKEN = localStorage.getItem('forsus_gh_token') || '';
+var GH_TOKEN = (localStorage.getItem('forsus_gh_token') || '').replace(/\s+/g, '');
+if (GH_TOKEN && GH_TOKEN !== localStorage.getItem('forsus_gh_token')) {
+  // o token salvo tinha espaco/quebra de linha escondida -- corrige sozinho, sem pedir de novo
+  localStorage.setItem('forsus_gh_token', GH_TOKEN);
+  console.log('[correcao automatica] token salvo tinha caracteres invisiveis; foi limpo automaticamente.');
+}
 var GH_API = 'https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + GH_FILE;
 var _memDb = {};
 var _ghSha = '0967ef424bce6791893e9a57bb952f80fd536e93';
@@ -5812,7 +5817,8 @@ function admLogin(){
     err.style.display = 'none';
     if (!GH_TOKEN) {
       var t = prompt('Cole o token do GitHub (fica salvo so neste navegador, nunca no codigo do site):') || '';
-      if (t.trim()) { localStorage.setItem('forsus_gh_token', t.trim()); GH_TOKEN = t.trim(); }
+      t = t.replace(/\s+/g, '');
+      if (t) { localStorage.setItem('forsus_gh_token', t); GH_TOKEN = t; }
     }
     _cdIniciarTudoAposLogin();
     notif('✅ Acesso liberado!');
