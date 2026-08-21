@@ -1449,6 +1449,12 @@ function admBanner(status, msg) {
   }
 }
 async function admVerificarConexaoGitHub() {
+  if (!GH_TOKEN || !GH_TOKEN.trim()) {
+    _admConexaoOk = false;
+    admBanner('erro', 'Nenhum token do GitHub foi salvo neste navegador (GH_TOKEN está vazio). Clique em "Sair" e entre de novo — a tela vai pedir o token outra vez.');
+    return;
+  }
+  console.log('[diagnostico] tamanho do token:', GH_TOKEN.length, '| comeca com ghp_:', GH_TOKEN.indexOf('ghp_')===0, '| tem espaco/quebra de linha:', /\s/.test(GH_TOKEN));
   admBanner('checando', 'Verificando conexão com o arquivo de dados na nuvem...');
   try {
     var r = await fetch(GH_API, { headers: { 'Authorization': 'token ' + GH_TOKEN } });
@@ -1459,11 +1465,12 @@ async function admVerificarConexaoGitHub() {
       admBanner('ok', 'Conectado — tudo que você publicar será salvo permanentemente.');
     } else {
       _admConexaoOk = false;
-      admBanner('erro', 'Falha na conexão com o GitHub (' + (j.message||'erro desconhecido') + ').');
+      admBanner('erro', 'Falha na conexão com o GitHub (' + (j.message||'erro desconhecido') + ', status ' + r.status + ').');
     }
   } catch(e) {
     _admConexaoOk = false;
-    admBanner('erro', 'Falha de rede ao tentar conectar com o GitHub.');
+    admBanner('erro', 'Falha de rede ao tentar conectar com o GitHub. Detalhe técnico: [' + (e.name||'Erro') + '] ' + (e.message||'sem mensagem') + '.');
+    console.error('admVerificarConexaoGitHub - erro completo:', e);
   }
 }
 
