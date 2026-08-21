@@ -1298,7 +1298,7 @@ var DB_KEY = 'cmddi_db_v3';
 var GH_OWNER = 'germanocoelho';
 var GH_REPO = 'forsusms.github.io';
 var GH_FILE = 'dados.json';
-var GH_TOKEN = (localStorage.getItem('forsus_gh_token') || '').replace(/\s+/g, '');
+var GH_TOKEN = (localStorage.getItem('forsus_gh_token') || '').replace(/[^A-Za-z0-9_]/g, '');
 if (GH_TOKEN && GH_TOKEN !== localStorage.getItem('forsus_gh_token')) {
   // o token salvo tinha espaco/quebra de linha escondida -- corrige sozinho, sem pedir de novo
   localStorage.setItem('forsus_gh_token', GH_TOKEN);
@@ -5817,7 +5817,7 @@ function admLogin(){
     err.style.display = 'none';
     if (!GH_TOKEN) {
       var t = prompt('Cole o token do GitHub (fica salvo so neste navegador, nunca no codigo do site):') || '';
-      t = t.replace(/\s+/g, '');
+      t = t.replace(/[^A-Za-z0-9_]/g, '');
       if (t) { localStorage.setItem('forsus_gh_token', t); GH_TOKEN = t; }
     }
     _cdIniciarTudoAposLogin();
