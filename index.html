@@ -226,6 +226,46 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
 .footer-grid a{display:block; color:rgba(255,255,255,.62); font-size:.86rem; margin-bottom:10px; transition:.2s}
 .footer-grid a:hover{color:var(--dourado-claro)}
 .foot-bottom{border-top:1px solid rgba(255,255,255,.1); padding:22px 28px; text-align:center; font-size:.78rem; color:rgba(255,255,255,.5)}
+/* ===================================================================
+   DIRETORIA PROVISORIA — organograma com linhas que se desenham,
+   cartao de destaque com anel pulsante, campo de estrelas
+   =================================================================== */
+.fs-diretoria-sec{padding-bottom:120px}
+.fs-estrelas{position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none}
+.fs-estrela{position:absolute; border-radius:50%; background:#fff; animation-name:fsCintilar; animation-timing-function:ease-in-out; animation-iteration-count:infinite}
+@keyframes fsCintilar{ 0%,100%{ opacity:.12; transform:scale(.7);} 50%{ opacity:.85; transform:scale(1.1);} }
+
+.fs-mandato-badge{display:inline-flex; align-items:center; gap:.5rem; margin-top:18px; padding:10px 20px; background:rgba(212,167,44,.12); border:1px solid rgba(212,167,44,.35); border-radius:100px; color:#fff; font-size:.85rem}
+.fs-mandato-ic{font-size:1rem}
+.fs-mandato-badge strong{color:var(--dourado-claro)}
+
+.fs-org-wrap{position:relative; max-width:1000px; margin:60px auto 0}
+.fs-org-topo{display:flex; justify-content:center; position:relative; z-index:2}
+.fs-org-linhas{display:block; width:100%; height:90px; position:relative; z-index:1; margin-top:-1px; color:rgba(212,167,44,.55)}
+.fs-linha{fill:none; stroke:currentColor; stroke-width:1.6; stroke-dasharray:400; stroke-dashoffset:400; animation:fsDesenharLinha 1.6s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes fsDesenharLinha{ to{ stroke-dashoffset:0; } }
+.fs-org-linha{display:grid; grid-template-columns:repeat(5,1fr); gap:20px; position:relative; z-index:2; margin-top:-2px}
+@media(max-width:900px){
+  .fs-org-linha{grid-template-columns:repeat(2,1fr)}
+  .fs-org-linhas{display:none}
+}
+@media(max-width:560px){ .fs-org-linha{grid-template-columns:1fr} }
+
+.fs-dir-card{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.13); border-radius:16px; padding:26px 16px; text-align:center; transition:.3s; position:relative}
+.fs-dir-card:hover{background:rgba(255,255,255,.1); transform:translateY(-6px); border-color:rgba(212,167,44,.45)}
+.fs-dir-card h3{color:#fff; font-size:.92rem; margin:12px 0 4px; line-height:1.3}
+.fs-dir-cargo{font-size:.72rem; color:var(--dourado-claro); font-weight:700; text-transform:uppercase; letter-spacing:.03em}
+
+.fs-dir-avatar{width:58px; height:58px; margin:0 auto; border-radius:50%; display:grid; place-items:center; font-family:'Fraunces',Georgia,serif; font-weight:700; font-size:1.05rem; color:#fff; background:linear-gradient(135deg,var(--azul-claro),var(--verde)); position:relative; z-index:2}
+.fs-avatar-sec{background:linear-gradient(135deg,var(--verde),var(--azul-2))}
+
+.fs-dir-destaque{max-width:280px; padding:34px 26px; border-color:rgba(212,167,44,.4); background:rgba(212,167,44,.07)}
+.fs-dir-destaque .fs-dir-avatar{width:80px; height:80px; font-size:1.4rem; background:linear-gradient(135deg,var(--dourado),var(--dourado-claro)); color:var(--tinta)}
+.fs-dir-destaque h3{font-size:1.08rem; margin-top:16px}
+.fs-dir-destaque .fs-dir-cargo{font-size:.78rem}
+.fs-dir-anel{position:absolute; inset:0; margin:auto; width:96px; height:96px; top:34px; border-radius:50%; border:1.5px solid rgba(212,167,44,.5); animation:fsAnelPulso 2.8s ease-in-out infinite}
+@keyframes fsAnelPulso{ 0%,100%{ transform:scale(.9); opacity:.7;} 50%{ transform:scale(1.25); opacity:0;} }
+@media (prefers-reduced-motion: reduce){ .fs-dir-anel{animation:none; display:none} .fs-linha{animation:none; stroke-dashoffset:0} .fs-estrela{animation:none; opacity:.4} }
 </style>
 </head>
 <body>
@@ -276,6 +316,7 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
       <a href="#sobre">O Fórum</a>
       <a href="#finalidades">Finalidades</a>
       <a href="#estrutura">Estrutura</a>
+      <a href="#diretoria">Diretoria</a>
       <a href="#legislacao">Legislação</a>
       <a href="#servicos">Associados</a>
       <a href="#noticias">Notícias</a>
@@ -401,8 +442,75 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
   </div>
 </section>
 
+<!-- DIRETORIA PROVISORIA -->
+<section id="diretoria" class="sec-escura fs-diretoria-sec" style="position:relative; overflow:hidden">
+  <div class="fs-estrelas" id="fs-estrelas-diretoria" aria-hidden="true"></div>
+  <div class="wrap" style="position:relative;z-index:1">
+    <div class="sec-head">
+      <span class="eyebrow" style="color:var(--dourado-claro)">Comissão Executiva</span>
+      <h2 style="color:#fff">Diretoria <em style="color:var(--dourado-claro)">Provisória</em></h2>
+      <p style="color:rgba(255,255,255,.75)">Gestão provisória de 6 meses, conduzindo o Fórum até a eleição definitiva pela Plenária.</p>
+      <div class="fs-mandato-badge">
+        <span class="fs-mandato-ic">📅</span>
+        <span>Mandato provisório: <strong>19/08/2026</strong> a <strong>19/02/2027</strong></span>
+      </div>
+    </div>
+
+    <div class="fs-org-wrap">
+      <!-- Coordenador em destaque no topo -->
+      <div class="fs-org-topo">
+        <div class="fs-dir-card fs-dir-destaque reveal tilt">
+          <div class="fs-dir-anel"></div>
+          <div class="fs-dir-avatar">EV</div>
+          <h3>Edivaldo Vieira</h3>
+          <span class="fs-dir-cargo">Coordenador</span>
+        </div>
+      </div>
+
+      <!-- Linhas conectoras SVG que se desenham -->
+      <svg class="fs-org-linhas" id="fs-org-svg" viewBox="0 0 1000 140" preserveAspectRatio="none" aria-hidden="true">
+        <path class="fs-linha" d="M500,0 L500,40 L84,40 L84,140"/>
+        <path class="fs-linha" d="M500,0 L500,40 L268,40 L268,140" style="animation-delay:.15s"/>
+        <path class="fs-linha" d="M500,0 L500,140" style="animation-delay:.3s"/>
+        <path class="fs-linha" d="M500,0 L500,40 L732,40 L732,140" style="animation-delay:.45s"/>
+        <path class="fs-linha" d="M500,0 L500,40 L916,40 L916,140" style="animation-delay:.6s"/>
+      </svg>
+
+      <!-- 5 demais membros -->
+      <div class="fs-org-linha">
+        <div class="fs-dir-card reveal tilt" style="animation-delay:.1s">
+          <div class="fs-dir-avatar fs-avatar-sec">CA</div>
+          <h3>Cleonice Alves de Albres</h3>
+          <span class="fs-dir-cargo">Vice-Coordenadora</span>
+        </div>
+        <div class="fs-dir-card reveal tilt" style="animation-delay:.2s">
+          <div class="fs-dir-avatar fs-avatar-sec">AV</div>
+          <h3>Ada Maria Venturini</h3>
+          <span class="fs-dir-cargo">1ª Secretária</span>
+        </div>
+        <div class="fs-dir-card reveal tilt" style="animation-delay:.3s">
+          <div class="fs-dir-avatar fs-avatar-sec">RG</div>
+          <h3>Raquel Correa Gomes</h3>
+          <span class="fs-dir-cargo">2ª Secretária</span>
+        </div>
+        <div class="fs-dir-card reveal tilt" style="animation-delay:.4s">
+          <div class="fs-dir-avatar fs-avatar-sec">JX</div>
+          <h3>Jair Bezerra Xavier</h3>
+          <span class="fs-dir-cargo">Coord. de Finanças</span>
+        </div>
+        <div class="fs-dir-card reveal tilt" style="animation-delay:.5s">
+          <div class="fs-dir-avatar fs-avatar-sec">PG</div>
+          <h3>Pastor Pedro Macedo Granja</h3>
+          <span class="fs-dir-cargo">Coord. de Comunicação e Mobilização Social</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- LEGISLACAO -->
 <section id="legislacao" class="sec-escura" style="position:relative">
+
   <svg class="fs-orn fs-orn-tl" viewBox="0 0 200 200" aria-hidden="true"><use href="#fs-grafismo"/></svg>
   <svg class="fs-orn fs-orn-br" viewBox="0 0 200 200" aria-hidden="true"><use href="#fs-grafismo"/></svg>
   <div class="wrap">
@@ -559,7 +667,7 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
     </div>
     <div>
       <h4>Navegação</h4>
-      <a href="#sobre">O Fórum</a><a href="#finalidades">Finalidades</a><a href="#estrutura">Estrutura</a><a href="#legislacao">Legislação</a><a href="#servicos">Associados</a>
+      <a href="#sobre">O Fórum</a><a href="#finalidades">Finalidades</a><a href="#estrutura">Estrutura</a><a href="#diretoria">Diretoria</a><a href="#legislacao">Legislação</a><a href="#servicos">Associados</a>
     </div>
     <div>
       <h4>Institucional</h4>
@@ -723,6 +831,27 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
       animarFaixa();
     }catch(e){}
   }
+
+  // Campo de estrelas da secao Diretoria
+  try{
+    var telaEstreitaFs = matchMedia('(max-width:640px)').matches;
+    document.querySelectorAll('.fs-estrelas').forEach(function(campoEl){
+      var total = telaEstreitaFs ? 24 : 50;
+      for (var si=0; si<total; si++){
+        var estrela = document.createElement('div');
+        estrela.className = 'fs-estrela';
+        var tam = 1 + Math.random()*2;
+        estrela.style.width = tam+'px';
+        estrela.style.height = tam+'px';
+        estrela.style.left = (Math.random()*100)+'%';
+        estrela.style.top = (Math.random()*100)+'%';
+        var dur = 2 + Math.random()*4;
+        estrela.style.animationDuration = dur+'s';
+        estrela.style.animationDelay = (Math.random()*dur*-1)+'s';
+        campoEl.appendChild(estrela);
+      }
+    });
+  }catch(e){}
 })();
 </script>
 
