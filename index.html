@@ -6,8 +6,7 @@
 <title>ForSUS/MS — Fórum Permanente dos Usuários do SUS de Mato Grosso do Sul</title>
 <meta name="description" content="Fórum Permanente das Entidades, Instituições e Movimentos Sociais representativos de Usuárias e Usuários do SUS de Mato Grosso do Sul — controle social, legislação e serviços aos associados.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   /* Paleta institucional: azul SUS + verde Brasil/MS + dourado de destaque */
@@ -28,17 +27,17 @@
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:'Inter',system-ui,sans-serif;color:var(--tinta);background:var(--marfim);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.15;margin:0}
+h1,h2,h3{font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.1;margin:0;letter-spacing:-.01em}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
 section{padding:96px 0}
 .eyebrow{font-size:.74rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--dourado)}
 .gold{color:var(--dourado)}
-.serif{font-family:'Fraunces',serif}
+.serif{font-family:'Space Grotesk',sans-serif}
 img{max-width:100%}
 
-/* ===== BOTOES ===== */
-.btn{display:inline-flex;align-items:center;gap:.55em;font-weight:700;font-size:.96rem;padding:15px 30px;border-radius:100px;transition:.25s;cursor:pointer;border:none}
+/* ===== BOTOES: canto cortado, identidade propria (nada de pilula arredondada) ===== */
+.btn{display:inline-flex;align-items:center;gap:.55em;font-weight:700;font-size:.96rem;padding:15px 30px;transition:.25s;cursor:pointer;border:none;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px))}
 .btn-primario{background:var(--dourado);color:var(--azul)}
 .btn-primario:hover{background:var(--dourado-claro);transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(212,167,44,.55)}
 .btn-ghost{background:transparent;color:var(--branco);border:1.5px solid rgba(255,255,255,.32)}
@@ -76,6 +75,14 @@ img{max-width:100%}
 .fs-faixa3d-wrap canvas{width:100%; height:100%; display:block}
 @media (max-width:640px){ .fs-faixa3d-wrap{height:100px} }
 
+/* ===== DIVISOR DIAGONAL: identidade propria do ForSUS ===== */
+.fs-divisor-diagonal{position:relative; width:100%; height:64px; overflow:hidden; background:var(--marfim)}
+.fs-diag{position:absolute; top:-20%; height:140%; width:38%; transform:skewX(-18deg)}
+.fs-diag-1{left:-6%; background:var(--azul)}
+.fs-diag-2{left:26%; background:var(--verde)}
+.fs-diag-3{left:58%; background:var(--dourado)}
+@media(max-width:640px){ .fs-divisor-diagonal{height:40px} }
+
 /* ===== HERO ===== */
 .hero{position:relative; background:radial-gradient(120% 130% at 50% -10%,var(--azul-2),var(--azul) 55%,#061826 100%); color:var(--branco); overflow:hidden; padding:150px 0 120px}
 #fs-particulas{position:absolute; inset:0; width:100%; height:100%; z-index:0}
@@ -88,9 +95,24 @@ img{max-width:100%}
 .hero-cta{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:8px}
 .hero-kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; max-width:900px; margin:56px auto 0; position:relative; z-index:2}
 .hero-kpi{background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14); border-radius:14px; padding:18px 10px; text-align:center; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px)}
-.hero-kpi .num{font-family:'Fraunces',serif; font-size:1.7rem; font-weight:700; color:var(--dourado-claro)}
+.hero-kpi .num{font-family:'Space Grotesk',sans-serif; font-size:1.7rem; font-weight:700; color:var(--dourado-claro)}
 .hero-kpi .lbl{font-size:.72rem; color:rgba(255,255,255,.75); margin-top:4px; letter-spacing:.02em}
 @media(max-width:760px){ .hero-kpis{grid-template-columns:repeat(2,1fr)} }
+
+/* ===== HERO SPLIT: layout assimetrico, identidade propria do ForSUS ===== */
+.hero-split{padding:140px 0 100px}
+.hero-split-grid{position:relative; z-index:2; display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center}
+@media(max-width:960px){ .hero-split-grid{grid-template-columns:1fr; gap:44px} }
+.hero-col-texto{text-align:left}
+.hero-col-texto h1{font-size:clamp(2rem,4vw,3.1rem); color:#fff; margin:16px 0 18px}
+.hero-col-texto h1 em{font-style:normal; color:var(--dourado-claro)}
+.hero-col-texto .sub{font-size:1.05rem; color:rgba(255,255,255,.8); max-width:520px; margin:0 0 30px}
+.hero-col-painel{display:flex; flex-direction:column; align-items:center}
+.hero-stat-painel{display:flex; flex-direction:column; gap:2px; width:100%; max-width:320px}
+.hero-stat-item{background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14); border-left:3px solid var(--dourado); padding:16px 20px; display:flex; align-items:baseline; gap:14px; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px)}
+.hero-stat-item .num{font-family:'Space Grotesk',sans-serif; font-size:1.5rem; font-weight:700; color:var(--dourado-claro); flex:none; min-width:52px}
+.hero-stat-item .lbl{font-size:.78rem; color:rgba(255,255,255,.78); line-height:1.35}
+@media(max-width:960px){ .hero-col-texto{text-align:center} .hero-col-texto .sub{margin-left:auto; margin-right:auto} .hero-col-painel{align-items:center} }
 
 /* ===== SECAO HEAD ===== */
 .sec-head{max-width:680px; margin:0 auto 44px; text-align:center}
@@ -127,7 +149,7 @@ img{max-width:100%}
 .nav-inner{display:flex; align-items:center; justify-content:space-between}
 .nav-brand{display:flex; align-items:center; gap:10px}
 .nav-brand-mark{width:44px;height:44px;object-fit:contain}
-.nav-brand-txt{font-family:'Fraunces',serif;font-weight:700;font-size:1.2rem;color:var(--branco)}
+.nav-brand-txt{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.2rem;color:var(--branco)}
 .nav-brand-txt b{color:var(--dourado-claro)}
 .nav-links{display:flex; align-items:center; gap:26px}
 .nav-links a{color:rgba(255,255,255,.86); font-size:.92rem; font-weight:600; transition:.2s}
@@ -165,20 +187,26 @@ img{max-width:100%}
 
 /* ===== FINALIDADES ===== */
 .tex-fundo-claro{background:linear-gradient(180deg,var(--marfim),#EFF3EE)}
-.fin-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; position:relative; z-index:1}
-@media(max-width:900px){.fin-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:640px){.fin-grid{grid-template-columns:1fr}}
-.fin-card{background:var(--branco); border-radius:var(--r); padding:28px 24px; border:1px solid var(--linha); transition:.3s}
+.fin-grid{display:grid; grid-template-columns:repeat(6,1fr); gap:18px; position:relative; z-index:1}
+.fin-grande{grid-column:span 4}
+.fin-grid>.fin-card:not(.fin-grande){grid-column:span 2}
+@media(max-width:900px){ .fin-grid{grid-template-columns:repeat(2,1fr)} .fin-grande{grid-column:span 2} .fin-grid>.fin-card:not(.fin-grande){grid-column:span 1} }
+@media(max-width:640px){ .fin-grid{grid-template-columns:1fr} .fin-grande{grid-column:span 1} }
+.fin-card{background:var(--branco); border-radius:2px; clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px)); padding:28px 24px; border:1px solid var(--linha); transition:.3s}
 .fin-card:hover{transform:translateY(-6px); box-shadow:0 20px 40px -20px rgba(11,61,99,.25); border-color:rgba(212,167,44,.4)}
+.fin-card.fin-grande{background:linear-gradient(135deg,var(--azul),var(--azul-2)); border-color:transparent; color:#fff}
+.fin-card.fin-grande h3{color:#fff}
+.fin-card.fin-grande p{color:rgba(255,255,255,.8)}
 .fin-ic{font-size:1.8rem; margin-bottom:12px}
+.fin-grande .fin-ic{font-size:2.4rem}
 .fin-card h3{font-size:1.05rem; margin-bottom:8px}
 .fin-card p{color:var(--cinza); font-size:.9rem}
 
 /* ===== ESTRUTURA ===== */
 .org-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px}
 @media(max-width:900px){.org-grid{grid-template-columns:1fr}}
-.org-card{background:var(--branco); border-radius:var(--r); padding:34px 28px; border:1px solid var(--linha); position:relative; overflow:hidden}
-.org-num{font-family:'Fraunces',serif; font-size:2.6rem; font-weight:800; color:rgba(11,61,99,.12); position:absolute; top:14px; right:20px}
+.org-card{background:var(--branco); border-radius:2px; clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px)); padding:34px 28px; border:1px solid var(--linha); position:relative; overflow:hidden}
+.org-num{font-family:'Space Grotesk',sans-serif; font-size:2.6rem; font-weight:800; color:rgba(11,61,99,.12); position:absolute; top:14px; right:20px}
 .org-card h3{font-size:1.25rem; margin-bottom:10px; color:var(--azul)}
 .org-card p{color:var(--cinza); font-size:.92rem; margin-bottom:16px}
 .org-tag{display:inline-block; font-size:.74rem; font-weight:700; color:var(--verde); background:rgba(14,124,74,.1); padding:6px 12px; border-radius:100px}
@@ -187,7 +215,7 @@ img{max-width:100%}
 .sec-escura{background:radial-gradient(120% 130% at 50% -10%,var(--azul-2),var(--azul) 60%,#061826 100%); position:relative}
 .leg-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; position:relative; z-index:1}
 @media(max-width:900px){.leg-grid{grid-template-columns:1fr}}
-.leg-card{display:block; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); border-radius:var(--r); padding:26px 22px; transition:.3s}
+.leg-card{display:block; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); border-radius:2px; clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px)); padding:26px 22px; transition:.3s}
 .leg-card:hover{background:rgba(255,255,255,.1); transform:translateY(-5px); border-color:rgba(212,167,44,.5)}
 .leg-selo{display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.04em; color:var(--azul); background:var(--dourado-claro); padding:4px 11px; border-radius:100px; margin-bottom:12px}
 .leg-card h3{color:var(--branco); font-size:1.05rem; margin-bottom:8px; line-height:1.3}
@@ -198,7 +226,7 @@ img{max-width:100%}
 .serv-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
 @media(max-width:900px){.serv-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.serv-grid{grid-template-columns:1fr}}
-.serv-card{background:var(--branco); border-radius:var(--r); padding:30px 26px; border:1px solid var(--linha); transition:.3s}
+.serv-card{background:var(--branco); border-radius:2px; clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px)); padding:30px 26px; border:1px solid var(--linha); transition:.3s}
 .serv-card:hover{transform:translateY(-6px); box-shadow:0 20px 40px -20px rgba(11,61,99,.22)}
 .serv-ic{font-size:1.9rem; margin-bottom:14px}
 .serv-card h3{font-size:1.1rem; margin-bottom:8px}
@@ -208,10 +236,10 @@ img{max-width:100%}
 /* ===== NOTICIAS ===== */
 .news-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
 @media(max-width:900px){.news-grid{grid-template-columns:1fr}}
-.news-card{display:block; background:var(--branco); border-radius:var(--r); padding:26px; border:1px solid var(--linha); transition:.3s}
+.news-card{display:block; background:var(--branco); border-radius:2px; clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px)); padding:26px; border:1px solid var(--linha); transition:.3s}
 .news-card:hover{transform:translateY(-5px); box-shadow:0 20px 40px -20px rgba(11,61,99,.2)}
 .news-tag{display:inline-block; font-size:.7rem; font-weight:700; color:var(--verde); background:rgba(14,124,74,.1); padding:4px 11px; border-radius:100px; margin-bottom:12px}
-.news-card h4{font-family:'Fraunces',serif; font-size:1.08rem; margin-bottom:8px; color:var(--azul)}
+.news-card h4{font-family:'Space Grotesk',sans-serif; font-size:1.08rem; margin-bottom:8px; color:var(--azul)}
 .news-card p{color:var(--cinza); font-size:.88rem; margin-bottom:12px}
 .news-more{color:var(--dourado); font-size:.84rem; font-weight:700}
 
@@ -256,7 +284,7 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
 .fs-dir-card h3{color:#fff; font-size:.92rem; margin:12px 0 4px; line-height:1.3}
 .fs-dir-cargo{font-size:.72rem; color:var(--dourado-claro); font-weight:700; text-transform:uppercase; letter-spacing:.03em}
 
-.fs-dir-avatar{width:58px; height:58px; margin:0 auto; border-radius:50%; display:grid; place-items:center; font-family:'Fraunces',Georgia,serif; font-weight:700; font-size:1.05rem; color:#fff; background:linear-gradient(135deg,var(--azul-claro),var(--verde)); position:relative; z-index:2}
+.fs-dir-avatar{width:58px; height:58px; margin:0 auto; border-radius:50%; display:grid; place-items:center; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.05rem; color:#fff; background:linear-gradient(135deg,var(--azul-claro),var(--verde)); position:relative; z-index:2}
 .fs-avatar-sec{background:linear-gradient(135deg,var(--verde),var(--azul-2))}
 
 .fs-dir-destaque{max-width:280px; padding:34px 26px; border-color:rgba(212,167,44,.4); background:rgba(212,167,44,.07)}
@@ -331,28 +359,32 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
 </header>
 
 <!-- HERO -->
-<section class="hero" id="top">
+<section class="hero hero-split" id="top">
   <canvas id="fs-particulas"></canvas>
-  <div class="wrap hero-conteudo">
-    <div class="logo-placa" style="margin:0 auto 18px">
-      <img src="imgs/forsus-logo-completa.png" alt="ForSUS/MS" style="height:150px">
+  <div class="wrap hero-split-grid">
+    <div class="hero-col-texto reveal-l">
+      <div class="faixa-bandeiras" style="justify-content:flex-start">
+        <img class="bandeira" alt="Bandeira do Brasil" src="imgs/bandeira-brasil.svg" style="width:32px">
+        <img class="bandeira" alt="Bandeira de Mato Grosso do Sul" src="imgs/bandeira-ms.svg" style="width:32px">
+      </div>
+      <span class="eyebrow">Controle Social do SUS em Mato Grosso do Sul</span>
+      <h1>Quem <em>usa</em> o SUS, dentro da sala onde ele é <em>decidido</em></h1>
+      <p class="sub">O ForSUS/MS reúne entidades, instituições, movimentos sociais e fóruns municipais de usuárias e usuários do Sistema Único de Saúde, atuando junto ao Conselho Estadual de Saúde para defender direitos, garantir equidade e fortalecer o controle social em todo o Estado.</p>
+      <div class="hero-cta" style="justify-content:flex-start">
+        <a href="#adesao" class="btn btn-primario">Filiar minha entidade</a>
+        <a href="#sobre" class="btn btn-ghost">Conhecer o Fórum ↓</a>
+      </div>
     </div>
-    <div class="faixa-bandeiras">
-      <img class="bandeira" alt="Bandeira do Brasil" src="imgs/bandeira-brasil.svg" style="width:40px">
-      <img class="bandeira" alt="Bandeira de Mato Grosso do Sul" src="imgs/bandeira-ms.svg" style="width:40px">
-    </div>
-    <span class="eyebrow">Controle Social do SUS em Mato Grosso do Sul</span>
-    <h1>A voz de quem <em>usa</em> o SUS, organizada para <em>decidir</em> o SUS</h1>
-    <p class="sub">O ForSUS/MS reúne entidades, instituições, movimentos sociais e fóruns municipais de usuárias e usuários do Sistema Único de Saúde, atuando junto ao Conselho Estadual de Saúde para defender direitos, garantir equidade e fortalecer o controle social em todo o Estado.</p>
-    <div class="hero-cta">
-      <a href="#adesao" class="btn btn-primario">Filiar minha entidade</a>
-      <a href="#sobre" class="btn btn-ghost">Conhecer o Fórum ↓</a>
-    </div>
-    <div class="hero-kpis">
-      <div class="hero-kpi"><div class="num">1990</div><div class="lbl">Lei 8.142 — base legal do controle social</div></div>
-      <div class="hero-kpi"><div class="num">79</div><div class="lbl">Municípios de MS no alcance do Fórum</div></div>
-      <div class="hero-kpi"><div class="num">2</div><div class="lbl">Vagas na Mesa Diretora do CES/MS</div></div>
-      <div class="hero-kpi"><div class="num">100%</div><div class="lbl">Deliberação por controle social</div></div>
+    <div class="hero-col-painel reveal-r">
+      <div class="logo-placa" style="margin:0 0 24px">
+        <img src="imgs/forsus-logo-completa.png" alt="ForSUS/MS" style="height:120px">
+      </div>
+      <div class="hero-stat-painel">
+        <div class="hero-stat-item"><div class="num">1990</div><div class="lbl">Lei 8.142, base legal do controle social</div></div>
+        <div class="hero-stat-item"><div class="num">79</div><div class="lbl">Municípios de MS no alcance do Fórum</div></div>
+        <div class="hero-stat-item"><div class="num">2</div><div class="lbl">Vagas na Mesa Diretora do CES/MS</div></div>
+        <div class="hero-stat-item"><div class="num">100%</div><div class="lbl">Deliberação por controle social</div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -397,13 +429,13 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
       <p>Onze frentes de atuação que sustentam o controle social da saúde pública em todo o Estado.</p>
     </div>
     <div class="fin-grid">
-      <div class="fin-card reveal tilt"><div class="fin-ic">🗳️</div><h3>Deliberação de propostas</h3><p>Discute e delibera propostas do segmento de usuários sobre políticas de saúde nos três níveis de governo.</p></div>
+      <div class="fin-card fin-grande reveal tilt"><div class="fin-ic">🗳️</div><h3>Deliberação de propostas</h3><p>Discute e delibera propostas do segmento de usuários sobre políticas de saúde nos três níveis de governo.</p></div>
       <div class="fin-card reveal tilt"><div class="fin-ic">🤝</div><h3>Articulação para o CES/MS</h3><p>Articula entidades e movimentos sociais para o preenchimento das vagas de usuários no Conselho Estadual de Saúde.</p></div>
       <div class="fin-card reveal tilt"><div class="fin-ic">🪑</div><h3>Mesa Diretora do CES/MS</h3><p>Indica, entre os conselheiros titulares eleitos, dois representantes para a Mesa Diretora do CES/MS.</p></div>
       <div class="fin-card reveal tilt"><div class="fin-ic">💪</div><h3>Fortalecimento do SUS</h3><p>Promove encontros, seminários e rodas de conversa para consolidar o SUS e o controle social.</p></div>
       <div class="fin-card reveal tilt"><div class="fin-ic">📋</div><h3>Cadastro de entidades</h3><p>Cadastra entidades e movimentos com abrangência estadual ou atuação em ao menos 3 municípios de MS.</p></div>
       <div class="fin-card reveal tilt"><div class="fin-ic">⚖️</div><h3>Equidade em saúde</h3><p>Defende o acesso universal e de qualidade do SUS, combatendo desigualdades no atendimento.</p></div>
-      <div class="fin-card reveal tilt"><div class="fin-ic">📣</div><h3>Representação institucional</h3><p>Representa, perante autoridades competentes, os interesses gerais das usuárias e usuários do SUS/MS.</p></div>
+      <div class="fin-card fin-grande reveal tilt"><div class="fin-ic">📣</div><h3>Representação institucional</h3><p>Representa, perante autoridades competentes, os interesses gerais das usuárias e usuários do SUS/MS.</p></div>
       <div class="fin-card reveal tilt"><div class="fin-ic">🤝</div><h3>Parcerias estratégicas</h3><p>Celebra parcerias que fortaleçam o controle social e o próprio Fórum, respeitada sua autonomia.</p></div>
       <div class="fin-card reveal tilt"><div class="fin-ic">🚨</div><h3>Denúncia e fiscalização</h3><p>Denuncia ações, omissões e políticas que contrariem os princípios norteadores do SUS.</p></div>
       <div class="fin-card reveal tilt"><div class="fin-ic">👥</div><h3>Participação em GTs</h3><p>Incentiva entidades membros em grupos de trabalho, comissões e outras instâncias de controle social.</p></div>
@@ -412,8 +444,12 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
   </div>
 </section>
 
-<!-- FAIXA 3D DIVISORA -->
-<div class="fs-faixa3d-wrap"><canvas id="fs-faixa3d"></canvas></div>
+<!-- DIVISOR DIAGONAL: identidade propria do ForSUS, sem 3D/Three.js -->
+<div class="fs-divisor-diagonal" aria-hidden="true">
+  <span class="fs-diag fs-diag-1"></span>
+  <span class="fs-diag fs-diag-2"></span>
+  <span class="fs-diag fs-diag-3"></span>
+</div>
 
 <!-- ESTRUTURA ORGANIZACIONAL -->
 <section id="estrutura">
@@ -650,8 +686,8 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
     <h2 style="color:var(--branco); margin-top:10px">Fortaleça o controle social <em>com a sua organização</em></h2>
     <p style="color:rgba(255,255,255,.82); max-width:600px; margin:14px auto 30px">Entidades, instituições, movimentos sociais e fóruns municipais de usuários do SUS em MS podem solicitar adesão ao ForSUS/MS a qualquer momento.</p>
     <div class="hero-cta">
-      <a href="https://wa.me/5567000000000?text=Ol%C3%A1!%20Quero%20saber%20como%20filiar%20minha%20entidade%20ao%20ForSUS%2FMS." target="_blank" class="btn btn-primario">💬 Falar pelo WhatsApp</a>
-      <a href="mailto:contato@forsusms.org.br" class="btn btn-ghost">✉ Enviar e-mail</a>
+      <a href="https://wa.me/556791845182?text=Ol%C3%A1!%20Quero%20saber%20como%20filiar%20minha%20entidade%20ao%20ForSUS%2FMS." target="_blank" class="btn btn-primario">💬 Falar pelo WhatsApp</a>
+      <a href="mailto:forsusms@hotmail.com" class="btn btn-ghost">✉ Enviar e-mail</a>
     </div>
   </div>
 </section>
@@ -681,8 +717,8 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
     </div>
     <div>
       <h4>Contato</h4>
-      <a href="mailto:contato@forsusms.org.br">contato@forsusms.org.br</a>
-      <a href="https://wa.me/5567000000000" target="_blank">WhatsApp do Fórum</a>
+      <a href="mailto:forsusms@hotmail.com">forsusms@hotmail.com</a>
+      <a href="https://wa.me/556791845182" target="_blank">WhatsApp do Fórum — (67) 9184-5182</a>
       <p style="color:rgba(255,255,255,.55); font-size:.82rem; margin-top:10px">Campo Grande/MS</p>
     </div>
   </div>
@@ -874,49 +910,7 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
     }catch(e){}
 
     // ===== PARTICULAS 3D DO HERO (removido: substituido pela Rede de Vozes acima) =====
-
-    // ===== FAIXA 3D DIVISORIA (octaedros) =====
-    if (window.THREE){
-    try{
-      var canvasFaixa = document.getElementById('fs-faixa3d');
-      var scene2 = new THREE.Scene();
-      var camera2 = new THREE.PerspectiveCamera(50, canvasFaixa.clientWidth/canvasFaixa.clientHeight, .1, 1000);
-      camera2.position.z = 40;
-      var renderer2 = new THREE.WebGLRenderer({canvas:canvasFaixa, alpha:true, antialias:!telaEstreita});
-      renderer2.setPixelRatio(Math.min(window.devicePixelRatio, telaEstreita?1.5:2));
-      function ajustarFaixa(){
-        var w = canvasFaixa.clientWidth, h = canvasFaixa.clientHeight;
-        renderer2.setSize(w,h,false); camera2.aspect = w/h; camera2.updateProjectionMatrix();
-      }
-      ajustarFaixa();
-      window.addEventListener('resize', ajustarFaixa);
-      var totalOcta = telaEstreita ? 10 : 22;
-      var octs = [];
-      var coresFaixa = [0x0B3D63, 0xD4A72C, 0x0E7C4A];
-      for (var j=0;j<totalOcta;j++){
-        var geoO = new THREE.OctahedronGeometry(1.3, 0);
-        var matO = new THREE.MeshStandardMaterial({color:coresFaixa[j%coresFaixa.length], roughness:.35, metalness:.15});
-        var octa = new THREE.Mesh(geoO, matO);
-        octa.position.x = (j - (totalOcta-1)/2) * (telaEstreita?4.2:3.4);
-        octa.position.y = Math.sin(j*.7)*2;
-        scene2.add(octa); octs.push(octa);
-      }
-      scene2.add(new THREE.AmbientLight(0xffffff,.75));
-      var luz2 = new THREE.DirectionalLight(0xffffff,.85); luz2.position.set(3,6,8); scene2.add(luz2);
-      var faixaVisivel = true;
-      if ('IntersectionObserver' in window){
-        new IntersectionObserver(function(entries){ faixaVisivel = entries[0].isIntersecting; },{threshold:0}).observe(canvasFaixa);
-      }
-      function animarFaixa(){
-        requestAnimationFrame(animarFaixa);
-        if (faixaVisivel){
-          if (!reduzMovimento) octs.forEach(function(o,idx){ o.rotation.x += .006; o.rotation.y += .008; });
-          renderer2.render(scene2, camera2);
-        }
-      }
-      animarFaixa();
-    }catch(e){}
-  }
+    // ===== FAIXA 3D DE OCTAEDROS (removida: substituida pelo Divisor Diagonal, puro CSS) =====
 
   // Campo de estrelas da secao Diretoria
   try{
