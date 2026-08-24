@@ -38,6 +38,8 @@ img{max-width:100%}
 
 /* ===== BOTOES: canto cortado, identidade propria (nada de pilula arredondada) ===== */
 .btn{display:inline-flex;align-items:center;gap:.55em;font-weight:700;font-size:.96rem;padding:15px 30px;transition:.25s;cursor:pointer;border:none;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px))}
+.btn-ic{width:19px; height:19px; flex:none}
+.rodape-ic{width:14px; height:14px; vertical-align:-2px; margin-right:2px}
 .btn-primario{background:var(--dourado);color:var(--azul)}
 .btn-primario:hover{background:var(--dourado-claro);transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(212,167,44,.55)}
 .btn-ghost{background:transparent;color:var(--branco);border:1.5px solid rgba(255,255,255,.32)}
@@ -221,8 +223,8 @@ img{max-width:100%}
 .fin-card.fin-grande{background:linear-gradient(135deg,var(--azul),var(--azul-2)); border-color:transparent; color:#fff}
 .fin-card.fin-grande h3{color:#fff}
 .fin-card.fin-grande p{color:rgba(255,255,255,.8)}
-.fin-ic{font-size:1.8rem; margin-bottom:12px}
-.fin-grande .fin-ic{font-size:2.4rem}
+.fin-ic{width:34px; height:34px; margin-bottom:14px; color:var(--dourado); display:block}
+.fin-grande .fin-ic{color:var(--dourado-claro); width:42px; height:42px}
 .fin-card h3{font-size:1.05rem; margin-bottom:8px}
 .fin-card p{color:var(--cinza); font-size:.9rem}
 
@@ -252,7 +254,7 @@ img{max-width:100%}
 @media(max-width:640px){.serv-grid{grid-template-columns:1fr}}
 .serv-card{background:var(--branco); border-radius:2px; clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px)); padding:30px 26px; border:1px solid var(--linha); transition:.3s}
 .serv-card:hover{transform:translateY(-6px); box-shadow:0 20px 40px -20px rgba(11,61,99,.22)}
-.serv-ic{font-size:1.9rem; margin-bottom:14px}
+.serv-ic{width:36px; height:36px; margin-bottom:14px; color:var(--azul); display:block}
 .serv-card h3{font-size:1.1rem; margin-bottom:8px}
 .serv-card p{color:var(--cinza); font-size:.9rem; margin-bottom:16px}
 .serv-cta{color:var(--azul); font-weight:700; font-size:.88rem}
@@ -288,7 +290,7 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
 @keyframes fsCintilar{ 0%,100%{ opacity:.12; transform:scale(.7);} 50%{ opacity:.85; transform:scale(1.1);} }
 
 .fs-mandato-badge{display:inline-flex; align-items:center; gap:.5rem; margin-top:18px; padding:10px 20px; background:rgba(212,167,44,.12); border:1px solid rgba(212,167,44,.35); border-radius:100px; color:#fff; font-size:.85rem}
-.fs-mandato-ic{font-size:1rem}
+.fs-mandato-ic{width:16px; height:16px; color:var(--dourado-claro); flex:none}
 .fs-mandato-badge strong{color:var(--dourado-claro)}
 
 .fs-org-wrap{position:relative; max-width:1000px; margin:60px auto 0}
@@ -326,7 +328,8 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
 .lightbox-diretoria{display:none; position:fixed; inset:0; background:rgba(0,0,0,.92); z-index:9999; align-items:center; justify-content:center; flex-direction:column}
 .lightbox-diretoria.aberto{display:flex}
 .lbd-avatar-grande{width:200px; height:200px; border-radius:50%; display:grid; place-items:center; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:3.4rem; color:#fff; background:linear-gradient(135deg,var(--azul-claro),var(--verde))}
-.lightbox-diretoria-close{position:absolute; top:1rem; right:1.2rem; background:none; border:none; color:#fff; font-size:2rem; cursor:pointer; opacity:.9}
+.lightbox-diretoria-close{position:absolute; top:1rem; right:1.2rem; background:none; border:none; color:#fff; cursor:pointer; opacity:.9}
+.lightbox-diretoria-close .fechar-ic{width:26px; height:26px}
 .lightbox-diretoria-close:hover{opacity:1}
 .lightbox-diretoria-nav{position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,.15); border:none; color:#fff; font-size:2rem; cursor:pointer; padding:.5rem .9rem; border-radius:50%; transition:.2s}
 .lightbox-diretoria-nav:hover{background:rgba(255,255,255,.28)}
@@ -376,6 +379,26 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
       <circle cx="100" cy="100" r="3" fill="currentColor" stroke="none"/>
     </g>
   </symbol>
+
+  <!-- ===== ICONES PROPRIOS: estilo linha fina, geometrico, consistente com a identidade do ForSUS ===== -->
+  <symbol id="ic-voto" viewBox="0 0 24 24"><path d="M4 10v10h16V10M4 10 12 4l8 6M4 10h16M9 14l2.2 2.2L15 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-elo" viewBox="0 0 24 24"><path d="M9.5 14.5 14.5 9.5M8 12a4 4 0 0 1 0-5.7l1.5-1.5a4 4 0 0 1 5.7 5.7L14 11.7M16 12a4 4 0 0 1 0 5.7l-1.5 1.5a4 4 0 0 1-5.7-5.7L10 12.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-cadeira" viewBox="0 0 24 24"><path d="M6 20V10a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v10M6 20h12M6 20v2M18 20v2M6 13h12M8 8V4M16 8V4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-pulso-mais" viewBox="0 0 24 24"><path d="M3 12h4l2-6 4 12 2-8 2 2h4M18 5v4M16 7h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-prancheta" viewBox="0 0 24 24"><path d="M9 4h6a1 1 0 0 1 1 1v1H8V5a1 1 0 0 1 1-1ZM6 6h12v14H6V6Zm3 6h6M9 15h6M9 9h6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-balanca" viewBox="0 0 24 24"><path d="M12 3v18M8 21h8M5 7h14M5 7 3 12a2.5 2.5 0 0 0 5 0L5 7ZM19 7l-2 5a2.5 2.5 0 0 0 5 0l-3-5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-megafone" viewBox="0 0 24 24"><path d="M3 10v4h3l7 4V6l-7 4H3ZM13 8.5a4 4 0 0 1 0 7M16.5 6a7.5 7.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-alerta" viewBox="0 0 24 24"><path d="M12 4 3 20h18L12 4Zm0 6.5v4M12 17h.01" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-pessoas" viewBox="0 0 24 24"><path d="M8 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm8 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM2 20c.5-3 2.8-5 6-5s5.5 2 6 5M14 20c.4-2.5 2.2-4.2 4.5-4.6.9-.2 2 .1 3.5 1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-predios" viewBox="0 0 24 24"><path d="M3 20V9l5-3v14M8 20V6l5 3v11M13 20V11l5-3v12M3 20h18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-calendario" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 10h16M8 3v4M16 3v4M8 14h2M8 17h2M14 14h2M14 17h2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="ic-doc-editar" viewBox="0 0 24 24"><path d="M14 4H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8M14 4l4 4M14 4v4h4M18.5 13.5l2 2L14 22l-3 1 1-3 6.5-6.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-pasta" viewBox="0 0 24 24"><path d="M3 7a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-grafico" viewBox="0 0 24 24"><path d="M4 20V10M9 20V4M14 20v-7M19 20V8M2 20h20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-chat" viewBox="0 0 24 24"><path d="M12 4C7 4 3 7.3 3 11.5c0 2.3 1.2 4.4 3.2 5.8L5 21l4.3-1.6c.9.2 1.8.3 2.7.3 5 0 9-3.3 9-7.5S17 4 12 4Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-envelope" viewBox="0 0 24 24"><path d="M4 6h16v12H4V6Zm0 0 8 7 8-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-cadeado" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 11V7a4 4 0 0 1 8 0v4M12 15v2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="ic-fechar" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
 </svg>
 
 <header class="nav" id="nav">
@@ -486,17 +509,17 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
       <p>Onze frentes de atuação que sustentam o controle social da saúde pública em todo o Estado.</p>
     </div>
     <div class="fin-grid">
-      <div class="fin-card fin-grande reveal tilt"><div class="fin-ic">🗳️</div><h3>Deliberação de propostas</h3><p>Discute e delibera propostas do segmento de usuários sobre políticas de saúde nos três níveis de governo.</p></div>
-      <div class="fin-card reveal tilt"><div class="fin-ic">🤝</div><h3>Articulação para o CES/MS</h3><p>Articula entidades e movimentos sociais para o preenchimento das vagas de usuários no Conselho Estadual de Saúde.</p></div>
-      <div class="fin-card reveal tilt"><div class="fin-ic">🪑</div><h3>Mesa Diretora do CES/MS</h3><p>Indica, entre os conselheiros titulares eleitos, dois representantes para a Mesa Diretora do CES/MS.</p></div>
-      <div class="fin-card reveal tilt"><div class="fin-ic">💪</div><h3>Fortalecimento do SUS</h3><p>Promove encontros, seminários e rodas de conversa para consolidar o SUS e o controle social.</p></div>
-      <div class="fin-card reveal tilt"><div class="fin-ic">📋</div><h3>Cadastro de entidades</h3><p>Cadastra entidades e movimentos com abrangência estadual ou atuação em ao menos 3 municípios de MS.</p></div>
-      <div class="fin-card reveal tilt"><div class="fin-ic">⚖️</div><h3>Equidade em saúde</h3><p>Defende o acesso universal e de qualidade do SUS, combatendo desigualdades no atendimento.</p></div>
-      <div class="fin-card fin-grande reveal tilt"><div class="fin-ic">📣</div><h3>Representação institucional</h3><p>Representa, perante autoridades competentes, os interesses gerais das usuárias e usuários do SUS/MS.</p></div>
-      <div class="fin-card reveal tilt"><div class="fin-ic">🤝</div><h3>Parcerias estratégicas</h3><p>Celebra parcerias que fortaleçam o controle social e o próprio Fórum, respeitada sua autonomia.</p></div>
-      <div class="fin-card reveal tilt"><div class="fin-ic">🚨</div><h3>Denúncia e fiscalização</h3><p>Denuncia ações, omissões e políticas que contrariem os princípios norteadores do SUS.</p></div>
-      <div class="fin-card reveal tilt"><div class="fin-ic">👥</div><h3>Participação em GTs</h3><p>Incentiva entidades membros em grupos de trabalho, comissões e outras instâncias de controle social.</p></div>
-      <div class="fin-card reveal tilt"><div class="fin-ic">🏘️</div><h3>Fóruns Municipais</h3><p>Apoia a organização e articulação dos Fóruns Municipais de Usuários do SUS em todo o Estado.</p></div>
+      <div class="fin-card fin-grande reveal tilt"><svg class="fin-ic"><use href="#ic-voto"/></svg><h3>Deliberação de propostas</h3><p>Discute e delibera propostas do segmento de usuários sobre políticas de saúde nos três níveis de governo.</p></div>
+      <div class="fin-card reveal tilt"><svg class="fin-ic"><use href="#ic-elo"/></svg><h3>Articulação para o CES/MS</h3><p>Articula entidades e movimentos sociais para o preenchimento das vagas de usuários no Conselho Estadual de Saúde.</p></div>
+      <div class="fin-card reveal tilt"><svg class="fin-ic"><use href="#ic-cadeira"/></svg><h3>Mesa Diretora do CES/MS</h3><p>Indica, entre os conselheiros titulares eleitos, dois representantes para a Mesa Diretora do CES/MS.</p></div>
+      <div class="fin-card reveal tilt"><svg class="fin-ic"><use href="#ic-pulso-mais"/></svg><h3>Fortalecimento do SUS</h3><p>Promove encontros, seminários e rodas de conversa para consolidar o SUS e o controle social.</p></div>
+      <div class="fin-card reveal tilt"><svg class="fin-ic"><use href="#ic-prancheta"/></svg><h3>Cadastro de entidades</h3><p>Cadastra entidades e movimentos com abrangência estadual ou atuação em ao menos 3 municípios de MS.</p></div>
+      <div class="fin-card reveal tilt"><svg class="fin-ic"><use href="#ic-balanca"/></svg><h3>Equidade em saúde</h3><p>Defende o acesso universal e de qualidade do SUS, combatendo desigualdades no atendimento.</p></div>
+      <div class="fin-card fin-grande reveal tilt"><svg class="fin-ic"><use href="#ic-megafone"/></svg><h3>Representação institucional</h3><p>Representa, perante autoridades competentes, os interesses gerais das usuárias e usuários do SUS/MS.</p></div>
+      <div class="fin-card reveal tilt"><svg class="fin-ic"><use href="#ic-elo"/></svg><h3>Parcerias estratégicas</h3><p>Celebra parcerias que fortaleçam o controle social e o próprio Fórum, respeitada sua autonomia.</p></div>
+      <div class="fin-card reveal tilt"><svg class="fin-ic"><use href="#ic-alerta"/></svg><h3>Denúncia e fiscalização</h3><p>Denuncia ações, omissões e políticas que contrariem os princípios norteadores do SUS.</p></div>
+      <div class="fin-card reveal tilt"><svg class="fin-ic"><use href="#ic-pessoas"/></svg><h3>Participação em GTs</h3><p>Incentiva entidades membros em grupos de trabalho, comissões e outras instâncias de controle social.</p></div>
+      <div class="fin-card reveal tilt"><svg class="fin-ic"><use href="#ic-predios"/></svg><h3>Fóruns Municipais</h3><p>Apoia a organização e articulação dos Fóruns Municipais de Usuários do SUS em todo o Estado.</p></div>
     </div>
   </div>
 </section>
@@ -548,7 +571,7 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
       <h2 style="color:#fff">Diretoria <em style="color:var(--dourado-claro)">Provisória</em></h2>
       <p style="color:rgba(255,255,255,.75)">Gestão provisória de 6 meses, conduzindo o Fórum até a eleição definitiva pela Plenária.</p>
       <div class="fs-mandato-badge">
-        <span class="fs-mandato-ic">📅</span>
+        <svg class="fs-mandato-ic"><use href="#ic-calendario"/></svg>
         <span>Mandato provisório: <strong>19/08/2026</strong> a <strong>19/02/2027</strong></span>
       </div>
     </div>
@@ -607,7 +630,7 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
 
 <!-- LIGHTBOX DA DIRETORIA (mesma tecnica do CMDDI/Aldeia XP) -->
 <div id="lightbox-diretoria" class="lightbox-diretoria" onclick="fecharLightboxDiretoria(event)">
-  <button onclick="fecharLightboxDiretoria()" class="lightbox-diretoria-close">✕</button>
+  <button onclick="fecharLightboxDiretoria()" class="lightbox-diretoria-close"><svg class="fechar-ic"><use href="#ic-fechar"/></svg></button>
   <button onclick="event.stopPropagation();navLightboxDiretoria(-1)" class="lightbox-diretoria-nav lightbox-diretoria-prev">‹</button>
   <button onclick="event.stopPropagation();navLightboxDiretoria(1)" class="lightbox-diretoria-nav lightbox-diretoria-next">›</button>
   <div id="lbd-avatar" class="lbd-avatar-grande"></div>
@@ -685,37 +708,37 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
     </div>
     <div class="serv-grid">
       <div class="serv-card reveal tilt">
-        <div class="serv-ic">📝</div>
+        <svg class="serv-ic"><use href="#ic-doc-editar"/></svg>
         <h3>Filiação ao Fórum</h3>
         <p>Preencha o Termo de Adesão e reúna a documentação exigida pelo Art. 4º do Regimento — Ata de Fundação, Estatuto, CNPJ e relatório de atividades.</p>
         <a href="#adesao" class="serv-cta">Iniciar adesão →</a>
       </div>
       <div class="serv-card reveal tilt">
-        <div class="serv-ic">🗓️</div>
+        <svg class="serv-ic"><use href="#ic-calendario"/></svg>
         <h3>Calendário de Plenárias</h3>
         <p>Consulte as datas, pautas e atas das reuniões ordinárias mensais e extraordinárias do ForSUS/MS.</p>
         <a href="#contato" class="serv-cta">Solicitar calendário →</a>
       </div>
       <div class="serv-card reveal tilt">
-        <div class="serv-ic">📁</div>
+        <svg class="serv-ic"><use href="#ic-pasta"/></svg>
         <h3>Atas e documentos</h3>
         <p>Acesso ao arquivo documental das reuniões, conforme mantido pela 1ª e 2ª Secretarias (Art. 14 do Regimento).</p>
         <a href="#contato" class="serv-cta">Solicitar acesso →</a>
       </div>
       <div class="serv-card reveal tilt">
-        <div class="serv-ic">👥</div>
+        <svg class="serv-ic"><use href="#ic-pessoas"/></svg>
         <h3>Grupos de Trabalho</h3>
         <p>Indique representantes para os GTs temáticos e acompanhe relatórios periódicos apresentados à Plenária.</p>
         <a href="#contato" class="serv-cta">Participar de um GT →</a>
       </div>
       <div class="serv-card reveal tilt">
-        <div class="serv-ic">📊</div>
+        <svg class="serv-ic"><use href="#ic-grafico"/></svg>
         <h3>Atualização cadastral</h3>
         <p>Entidades filiadas devem apresentar anualmente seu relatório de atividades (Art. 5º, §4º do Regimento).</p>
         <a href="#contato" class="serv-cta">Atualizar cadastro →</a>
       </div>
       <div class="serv-card reveal tilt">
-        <div class="serv-ic">📣</div>
+        <svg class="serv-ic"><use href="#ic-megafone"/></svg>
         <h3>Comunicação e mobilização</h3>
         <p>Receba pautas, convocações e informativos sobre a saúde pública em MS pelos canais oficiais do Fórum.</p>
         <a href="#contato" class="serv-cta">Entrar na lista →</a>
@@ -761,8 +784,8 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
     <h2 style="color:var(--branco); margin-top:10px">Fortaleça o controle social <em>com a sua organização</em></h2>
     <p style="color:rgba(255,255,255,.82); max-width:600px; margin:14px auto 30px">Entidades, instituições, movimentos sociais e fóruns municipais de usuários do SUS em MS podem solicitar adesão ao ForSUS/MS a qualquer momento.</p>
     <div class="hero-cta">
-      <a href="https://wa.me/556791845182?text=Ol%C3%A1!%20Quero%20saber%20como%20filiar%20minha%20entidade%20ao%20ForSUS%2FMS." target="_blank" class="btn btn-primario">💬 Falar pelo WhatsApp</a>
-      <a href="mailto:forsusms@hotmail.com" class="btn btn-ghost">✉ Enviar e-mail</a>
+      <a href="https://wa.me/556791845182?text=Ol%C3%A1!%20Quero%20saber%20como%20filiar%20minha%20entidade%20ao%20ForSUS%2FMS." target="_blank" class="btn btn-primario"><svg class="btn-ic"><use href="#ic-chat"/></svg> Falar pelo WhatsApp</a>
+      <a href="mailto:forsusms@hotmail.com" class="btn btn-ghost"><svg class="btn-ic"><use href="#ic-envelope"/></svg> Enviar e-mail</a>
     </div>
   </div>
 </section>
@@ -803,7 +826,7 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
     <br><span style="opacity:.6">Este projeto é protegido pela Lei nº 9.610/1998 (Lei de Direitos Autorais).</span>
     <br>
     <a href="adm.html" style="display:inline-block;margin-top:14px;color:rgba(255,255,255,.32);font-size:.72rem;text-decoration:none;letter-spacing:.04em;transition:color .2s" onmouseover="this.style.color='rgba(212,167,44,.8)'" onmouseout="this.style.color='rgba(255,255,255,.32)'">
-      🔒 Painel Administrativo · Acesso restrito
+      <svg class="rodape-ic"><use href="#ic-cadeado"/></svg> Painel Administrativo · Acesso restrito
     </a>
   </div>
 </footer>
