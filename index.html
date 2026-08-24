@@ -83,6 +83,13 @@ img{max-width:100%}
 .fs-diag-3{left:58%; background:var(--dourado)}
 @media(max-width:640px){ .fs-divisor-diagonal{height:40px} }
 
+/* ===== DIVISOR ECG: linha de pulso cardiaco que se desenha, tematica de saude ===== */
+.fs-ecg-wrap{position:relative; width:100%; height:70px; overflow:hidden; background:var(--carvao)}
+.fs-ecg-svg{width:100%; height:100%; display:block; color:var(--dourado-claro)}
+.fs-ecg-linha{fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:2400; stroke-dashoffset:2400; transition:stroke-dashoffset 2.6s cubic-bezier(.2,.7,.2,1); filter:drop-shadow(0 0 6px rgba(232,199,102,.5))}
+.fs-ecg-wrap.in .fs-ecg-linha{stroke-dashoffset:0}
+@media (prefers-reduced-motion: reduce){ .fs-ecg-linha{transition:none; stroke-dashoffset:0} }
+
 /* ===== HERO ===== */
 .hero{position:relative; background:radial-gradient(120% 130% at 50% -10%,var(--azul-2),var(--azul) 55%,#061826 100%); color:var(--branco); overflow:hidden; padding:150px 0 120px}
 #fs-particulas{position:absolute; inset:0; width:100%; height:100%; z-index:0}
@@ -108,10 +115,27 @@ img{max-width:100%}
 .hero-col-texto h1 em{font-style:normal; color:var(--dourado-claro)}
 .hero-col-texto .sub{font-size:1.05rem; color:rgba(255,255,255,.8); max-width:520px; margin:0 0 30px}
 .hero-col-painel{display:flex; flex-direction:column; align-items:center}
+
+/* ===== LUZ: brilho suave pulsante, efeito generico trazido do ecossistema ===== */
+.fs-luz{position:absolute; z-index:0; border-radius:50%; pointer-events:none; filter:blur(40px); animation:fsLuzPulsar 6s ease-in-out infinite}
+@keyframes fsLuzPulsar{ 0%,100%{ opacity:.35; transform:translateX(-50%) scale(1);} 50%{ opacity:.6; transform:translateX(-50%) scale(1.12);} }
+@media (prefers-reduced-motion: reduce){ .fs-luz{animation:none; opacity:.4} }
 .hero-stat-painel{display:flex; flex-direction:column; gap:2px; width:100%; max-width:320px}
 .hero-stat-item{background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14); border-left:3px solid var(--dourado); padding:16px 20px; display:flex; align-items:baseline; gap:14px; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px)}
 .hero-stat-item .num{font-family:'Space Grotesk',sans-serif; font-size:1.5rem; font-weight:700; color:var(--dourado-claro); flex:none; min-width:52px}
 .hero-stat-item .lbl{font-size:.78rem; color:rgba(255,255,255,.78); line-height:1.35}
+
+/* ===== MEDIDOR CIRCULAR DE PULSO: adaptado do ecossistema, sem tematica etnica ===== */
+.fs-pulso-wrap{position:relative; width:150px; height:150px; margin:16px auto 0; display:grid; place-items:center}
+.fs-pulso-svg{position:absolute; inset:0; width:100%; height:100%; transform:rotate(-90deg)}
+.fs-pulso-trilha{fill:none; stroke:rgba(255,255,255,.12); stroke-width:9}
+.fs-pulso-arco{fill:none; stroke:url(#fs-grad-pulso); stroke-width:9; stroke-linecap:round; stroke-dasharray:503; stroke-dashoffset:503; animation:fsPulsoArco 2.4s ease-out .3s forwards, fsPulsoGlow 2.4s ease-in-out 2.7s infinite}
+@keyframes fsPulsoArco{ to{ stroke-dashoffset:0; } }
+@keyframes fsPulsoGlow{ 0%,100%{ filter:drop-shadow(0 0 3px rgba(212,167,44,.4)); } 50%{ filter:drop-shadow(0 0 11px rgba(212,167,44,.7)); } }
+.fs-pulso-centro{position:relative; z-index:2; text-align:center; padding:0 12px}
+.fs-pulso-num{display:block; font-family:'Space Grotesk',sans-serif; font-size:1.5rem; font-weight:700; color:var(--dourado-claro)}
+.fs-pulso-lbl{display:block; font-size:.65rem; color:rgba(255,255,255,.72); margin-top:2px; line-height:1.3}
+@media (prefers-reduced-motion: reduce){ .fs-pulso-arco{animation:fsPulsoArco 1s ease-out forwards} }
 @media(max-width:960px){ .hero-col-texto{text-align:center} .hero-col-texto .sub{margin-left:auto; margin-right:auto} .hero-col-painel{align-items:center} }
 
 /* ===== SECAO HEAD ===== */
@@ -294,6 +318,22 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
 .fs-dir-anel{position:absolute; inset:0; margin:auto; width:96px; height:96px; top:34px; border-radius:50%; border:1.5px solid rgba(212,167,44,.5); animation:fsAnelPulso 2.8s ease-in-out infinite}
 @keyframes fsAnelPulso{ 0%,100%{ transform:scale(.9); opacity:.7;} 50%{ transform:scale(1.25); opacity:0;} }
 @media (prefers-reduced-motion: reduce){ .fs-dir-anel{animation:none; display:none} .fs-linha{animation:none; stroke-dashoffset:0} .fs-estrela{animation:none; opacity:.4} }
+
+/* ===== BOTAO DE AVATAR CLICAVEL + LIGHTBOX DA DIRETORIA (tecnica do CMDDI/Aldeia XP) ===== */
+.fs-dir-avatar-btn{background:none; border:none; padding:0; cursor:pointer; position:relative; z-index:2}
+.fs-dir-avatar-btn:hover .fs-dir-avatar{transform:scale(1.08); box-shadow:0 0 0 3px rgba(212,167,44,.35)}
+.fs-dir-avatar{transition:.25s}
+.lightbox-diretoria{display:none; position:fixed; inset:0; background:rgba(0,0,0,.92); z-index:9999; align-items:center; justify-content:center; flex-direction:column}
+.lightbox-diretoria.aberto{display:flex}
+.lbd-avatar-grande{width:200px; height:200px; border-radius:50%; display:grid; place-items:center; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:3.4rem; color:#fff; background:linear-gradient(135deg,var(--azul-claro),var(--verde))}
+.lightbox-diretoria-close{position:absolute; top:1rem; right:1.2rem; background:none; border:none; color:#fff; font-size:2rem; cursor:pointer; opacity:.9}
+.lightbox-diretoria-close:hover{opacity:1}
+.lightbox-diretoria-nav{position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,.15); border:none; color:#fff; font-size:2rem; cursor:pointer; padding:.5rem .9rem; border-radius:50%; transition:.2s}
+.lightbox-diretoria-nav:hover{background:rgba(255,255,255,.28)}
+.lightbox-diretoria-prev{left:1rem}
+.lightbox-diretoria-next{right:1rem}
+.lightbox-diretoria-leg{color:#fff; margin-top:1.2rem; font-size:.95rem; font-weight:700; text-align:center; max-width:600px; padding:0 1rem}
+.lightbox-diretoria-count{color:rgba(255,255,255,.7); font-size:.75rem; margin-top:.35rem}
 </style>
 </head>
 <body>
@@ -376,14 +416,31 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
       </div>
     </div>
     <div class="hero-col-painel reveal-r">
-      <div class="logo-placa" style="margin:0 0 24px">
+      <div class="fs-luz" style="width:280px;height:280px;left:50%;top:-40px;transform:translateX(-50%);background:radial-gradient(circle,rgba(212,167,44,.35),rgba(14,124,74,.2) 55%,transparent 75%)"></div>
+      <div class="logo-placa" style="margin:0 0 24px; position:relative; z-index:1">
         <img src="imgs/forsus-logo-completa.png" alt="ForSUS/MS" style="height:120px">
       </div>
       <div class="hero-stat-painel">
         <div class="hero-stat-item"><div class="num">1990</div><div class="lbl">Lei 8.142, base legal do controle social</div></div>
         <div class="hero-stat-item"><div class="num">79</div><div class="lbl">Municípios de MS no alcance do Fórum</div></div>
         <div class="hero-stat-item"><div class="num">2</div><div class="lbl">Vagas na Mesa Diretora do CES/MS</div></div>
-        <div class="hero-stat-item"><div class="num">100%</div><div class="lbl">Deliberação por controle social</div></div>
+      </div>
+      <div class="fs-pulso-wrap">
+        <svg class="fs-pulso-svg" viewBox="0 0 200 200">
+          <defs>
+            <linearGradient id="fs-grad-pulso" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#0E7C4A"/>
+              <stop offset="55%" style="stop-color:#D4A72C"/>
+              <stop offset="100%" style="stop-color:#E8C766"/>
+            </linearGradient>
+          </defs>
+          <circle class="fs-pulso-trilha" cx="100" cy="100" r="80"/>
+          <circle class="fs-pulso-arco" cx="100" cy="100" r="80"/>
+        </svg>
+        <div class="fs-pulso-centro">
+          <span class="fs-pulso-num">100%</span>
+          <span class="fs-pulso-lbl">deliberação por controle social</span>
+        </div>
       </div>
     </div>
   </div>
@@ -501,7 +558,7 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
       <div class="fs-org-topo">
         <div class="fs-dir-card fs-dir-destaque reveal tilt">
           <div class="fs-dir-anel"></div>
-          <div class="fs-dir-avatar">EV</div>
+          <button class="fs-dir-avatar-btn" onclick="abrirLightboxDiretoria(0)" title="Ver foto de Edivaldo Vieira"><div class="fs-dir-avatar">EV</div></button>
           <h3>Edivaldo Vieira</h3>
           <span class="fs-dir-cargo">Coordenador</span>
         </div>
@@ -519,27 +576,27 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
       <!-- 5 demais membros -->
       <div class="fs-org-linha">
         <div class="fs-dir-card reveal tilt" style="animation-delay:.1s">
-          <div class="fs-dir-avatar fs-avatar-sec">CA</div>
+          <button class="fs-dir-avatar-btn" onclick="abrirLightboxDiretoria(1)" title="Ver foto de Cleonice Alves de Albres"><div class="fs-dir-avatar fs-avatar-sec">CA</div></button>
           <h3>Cleonice Alves de Albres</h3>
           <span class="fs-dir-cargo">Vice-Coordenadora</span>
         </div>
         <div class="fs-dir-card reveal tilt" style="animation-delay:.2s">
-          <div class="fs-dir-avatar fs-avatar-sec">AV</div>
+          <button class="fs-dir-avatar-btn" onclick="abrirLightboxDiretoria(2)" title="Ver foto de Ada Maria Venturini"><div class="fs-dir-avatar fs-avatar-sec">AV</div></button>
           <h3>Ada Maria Venturini</h3>
           <span class="fs-dir-cargo">1ª Secretária</span>
         </div>
         <div class="fs-dir-card reveal tilt" style="animation-delay:.3s">
-          <div class="fs-dir-avatar fs-avatar-sec">RG</div>
+          <button class="fs-dir-avatar-btn" onclick="abrirLightboxDiretoria(3)" title="Ver foto de Raquel Correa Gomes"><div class="fs-dir-avatar fs-avatar-sec">RG</div></button>
           <h3>Raquel Correa Gomes</h3>
           <span class="fs-dir-cargo">2ª Secretária</span>
         </div>
         <div class="fs-dir-card reveal tilt" style="animation-delay:.4s">
-          <div class="fs-dir-avatar fs-avatar-sec">JX</div>
+          <button class="fs-dir-avatar-btn" onclick="abrirLightboxDiretoria(4)" title="Ver foto de Jair Bezerra Xavier"><div class="fs-dir-avatar fs-avatar-sec">JX</div></button>
           <h3>Jair Bezerra Xavier</h3>
           <span class="fs-dir-cargo">Coord. de Finanças</span>
         </div>
         <div class="fs-dir-card reveal tilt" style="animation-delay:.5s">
-          <div class="fs-dir-avatar fs-avatar-sec">PG</div>
+          <button class="fs-dir-avatar-btn" onclick="abrirLightboxDiretoria(5)" title="Ver foto de Pastor Pedro Macedo Granja"><div class="fs-dir-avatar fs-avatar-sec">PG</div></button>
           <h3>Pastor Pedro Macedo Granja</h3>
           <span class="fs-dir-cargo">Coord. de Comunicação e Mobilização Social</span>
         </div>
@@ -548,12 +605,30 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
   </div>
 </section>
 
+<!-- LIGHTBOX DA DIRETORIA (mesma tecnica do CMDDI/Aldeia XP) -->
+<div id="lightbox-diretoria" class="lightbox-diretoria" onclick="fecharLightboxDiretoria(event)">
+  <button onclick="fecharLightboxDiretoria()" class="lightbox-diretoria-close">✕</button>
+  <button onclick="event.stopPropagation();navLightboxDiretoria(-1)" class="lightbox-diretoria-nav lightbox-diretoria-prev">‹</button>
+  <button onclick="event.stopPropagation();navLightboxDiretoria(1)" class="lightbox-diretoria-nav lightbox-diretoria-next">›</button>
+  <div id="lbd-avatar" class="lbd-avatar-grande"></div>
+  <div id="lbd-leg" class="lightbox-diretoria-leg"></div>
+  <div id="lbd-count" class="lightbox-diretoria-count"></div>
+</div>
+
+<!-- DIVISOR PULSO CARDIACO (ECG): efeito de linha que se desenha, adaptado do ecossistema sem tematica etnica -->
+<div class="fs-ecg-wrap" aria-hidden="true">
+  <svg class="fs-ecg-svg" id="fs-ecg-svg" viewBox="0 0 1000 90" preserveAspectRatio="none">
+    <polyline class="fs-ecg-linha" points="0,45 120,45 145,45 160,10 175,80 190,45 230,45 260,45 280,20 295,70 310,45 420,45 445,45 460,10 475,80 490,45 530,45 560,45 580,20 595,70 610,45 720,45 745,45 760,10 775,80 790,45 830,45 860,45 880,20 895,70 910,45 1000,45"/>
+  </svg>
+</div>
+
 <!-- LEGISLACAO -->
-<section id="legislacao" class="sec-escura" style="position:relative">
+<section id="legislacao" class="sec-escura" style="position:relative; overflow:hidden">
+  <div class="fs-estrelas" id="fs-estrelas-legislacao" aria-hidden="true"></div>
 
   <svg class="fs-orn fs-orn-tl" viewBox="0 0 200 200" aria-hidden="true"><use href="#fs-grafismo"/></svg>
   <svg class="fs-orn fs-orn-br" viewBox="0 0 200 200" aria-hidden="true"><use href="#fs-grafismo"/></svg>
-  <div class="wrap">
+  <div class="wrap" style="position:relative;z-index:1">
     <div class="sec-head">
       <span class="eyebrow">Para conselheiras, conselheiros e entidades filiadas</span>
       <h2 style="color:var(--branco)">Legislação que <em>sustenta</em> o controle social</h2>
@@ -932,6 +1007,65 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
       }
     });
   }catch(e){}
+
+  // Divisor ECG: dispara o desenho da linha ao entrar na tela
+  try{
+    var ecgWrap = document.querySelector('.fs-ecg-wrap');
+    if (ecgWrap && 'IntersectionObserver' in window){
+      var ioEcg = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){ ecgWrap.classList.add('in'); ioEcg.unobserve(ecgWrap); }
+        });
+      }, {threshold:.3});
+      ioEcg.observe(ecgWrap);
+    } else if (ecgWrap){
+      ecgWrap.classList.add('in');
+    }
+  }catch(e){}
+
+  // Lightbox da Diretoria (mesma tecnica do CMDDI/Aldeia XP)
+  window._diretoriaFotos = [
+    {ini:'EV', cor:'linear-gradient(135deg,#D4A72C,#E8C766)', leg:'Edivaldo Vieira — Coordenador'},
+    {ini:'CA', cor:'linear-gradient(135deg,#2E7DB8,#0E7C4A)', leg:'Cleonice Alves de Albres — Vice-Coordenadora'},
+    {ini:'AV', cor:'linear-gradient(135deg,#2E7DB8,#0E7C4A)', leg:'Ada Maria Venturini — 1ª Secretária'},
+    {ini:'RG', cor:'linear-gradient(135deg,#2E7DB8,#0E7C4A)', leg:'Raquel Correa Gomes — 2ª Secretária'},
+    {ini:'JX', cor:'linear-gradient(135deg,#2E7DB8,#0E7C4A)', leg:'Jair Bezerra Xavier — Coord. de Finanças'},
+    {ini:'PG', cor:'linear-gradient(135deg,#2E7DB8,#0E7C4A)', leg:'Pastor Pedro Macedo Granja — Coord. de Comunicação e Mobilização Social'}
+  ];
+  window._diretoriaIdx = 0;
+  window.abrirLightboxDiretoria = function(idx){
+    window._diretoriaIdx = idx;
+    _renderLightboxDiretoria();
+    var lb = document.getElementById('lightbox-diretoria');
+    if (lb){ lb.classList.add('aberto'); document.body.style.overflow = 'hidden'; }
+  };
+  window.navLightboxDiretoria = function(dir){
+    var total = window._diretoriaFotos.length;
+    window._diretoriaIdx = (window._diretoriaIdx + dir + total) % total;
+    _renderLightboxDiretoria();
+  };
+  window.fecharLightboxDiretoria = function(e){
+    if (e && e.target !== document.getElementById('lightbox-diretoria')) return;
+    var lb = document.getElementById('lightbox-diretoria');
+    if (lb){ lb.classList.remove('aberto'); document.body.style.overflow = ''; }
+  };
+  function _renderLightboxDiretoria(){
+    var item = window._diretoriaFotos[window._diretoriaIdx];
+    if (!item) return;
+    var av = document.getElementById('lbd-avatar');
+    var leg = document.getElementById('lbd-leg');
+    var cnt = document.getElementById('lbd-count');
+    if (av){ av.textContent = item.ini; av.style.background = item.cor; }
+    if (leg) leg.textContent = item.leg;
+    if (cnt) cnt.textContent = (window._diretoriaIdx + 1) + ' / ' + window._diretoriaFotos.length;
+  }
+  document.addEventListener('keydown', function(e){
+    var lb = document.getElementById('lightbox-diretoria');
+    if (!lb || !lb.classList.contains('aberto')) return;
+    if (e.key === 'ArrowRight') navLightboxDiretoria(1);
+    else if (e.key === 'ArrowLeft') navLightboxDiretoria(-1);
+    else if (e.key === 'Escape') fecharLightboxDiretoria();
+  });
 })();
 </script>
 
