@@ -761,7 +761,7 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
       // ===== REDE DE VOZES: nos que representam entidades/foruns, conectados
       // por pulsos de dados que viajam entre eles quando proximos =====
       var coresRede = ['#2E7DB8', '#3FAE72', '#D4A72C', '#0B3D63', '#0E7C4A'];
-      var totalNos = telaEstreita ? 22 : 42;
+      var totalNos = telaEstreita ? 38 : 78;
       var nos = [];
       function criarNo(w, h){
         return {
@@ -769,7 +769,7 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
           y: Math.random()*h,
           vx: (Math.random()-0.5)*0.12,
           vy: (Math.random()-0.5)*0.12,
-          raio: 2.2 + Math.random()*2.4,
+          raio: 3.2 + Math.random()*3.2,
           cor: coresRede[Math.floor(Math.random()*coresRede.length)],
           faseP: Math.random()*Math.PI*2
         };
@@ -784,7 +784,7 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
       inicializarRede();
       window.addEventListener('resize', inicializarRede);
 
-      var DIST_CONEXAO = telaEstreita ? 140 : 190;
+      var DIST_CONEXAO = telaEstreita ? 170 : 240;
       var tempoRede = 0;
 
       function atualizarERenderizarRede(w, h){
@@ -807,16 +807,16 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
             var dx = nos[a].x-nos[b].x, dy = nos[a].y-nos[b].y;
             var dist = Math.sqrt(dx*dx+dy*dy);
             if (dist < DIST_CONEXAO){
-              var alpha = (1 - dist/DIST_CONEXAO) * 0.35;
-              ctxHero.strokeStyle = 'rgba(212,167,44,' + alpha.toFixed(3) + ')';
-              ctxHero.lineWidth = 1;
+              var alpha = (1 - dist/DIST_CONEXAO) * 0.75;
+              ctxHero.strokeStyle = 'rgba(232,199,102,' + alpha.toFixed(3) + ')';
+              ctxHero.lineWidth = 1.4;
               ctxHero.beginPath();
               ctxHero.moveTo(nos[a].x, nos[a].y);
               ctxHero.lineTo(nos[b].x, nos[b].y);
               ctxHero.stroke();
 
               // ocasionalmente, disparar um pulso de dado viajando nessa conexao
-              if (!reduzMovimento && Math.random() < 0.006){
+              if (!reduzMovimento && Math.random() < 0.014){
                 pulsos.push({de:nos[a], para:nos[b], t:0, cor: nos[a].cor});
               }
             }
