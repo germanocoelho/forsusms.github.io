@@ -337,6 +337,53 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
 .lightbox-diretoria-next{right:1rem}
 .lightbox-diretoria-leg{color:#fff; margin-top:1.2rem; font-size:.95rem; font-weight:700; text-align:center; max-width:600px; padding:0 1rem}
 .lightbox-diretoria-count{color:rgba(255,255,255,.7); font-size:.75rem; margin-top:.35rem}
+
+/* ===================================================================
+   MAPA DA REDE DE ENTIDADES — mapa 3D interativo de MS com efeitos
+   =================================================================== */
+.fs-mapa-layout{display:grid; grid-template-columns:1.3fr 1fr; gap:36px; align-items:start; margin-top:20px}
+@media(max-width:960px){ .fs-mapa-layout{grid-template-columns:1fr} }
+
+.fs-mapa-caixa{position:relative; perspective:1400px}
+.fs-mapa-svg{width:100%; height:auto; display:block; transform-style:preserve-3d; transition:transform .15s ease-out; filter:drop-shadow(0 30px 50px rgba(0,0,0,.55))}
+.fs-mapa-estado{fill:url(#fs-grad-estado); stroke:var(--dourado); stroke-width:2; stroke-linejoin:round}
+.fs-mapa-instrucao{text-align:center; font-size:.74rem; color:rgba(255,255,255,.5); font-style:italic; margin-top:10px}
+
+.fs-mapa-linha-rede{fill:none; stroke:var(--dourado-claro); stroke-width:1.3; stroke-dasharray:5 4; opacity:0; transition:opacity .5s ease}
+.fs-mapa-linha-rede.ativa{opacity:.75; animation:fs-mapa-fluxo 1.2s linear infinite}
+@keyframes fs-mapa-fluxo{ to{ stroke-dashoffset:-18; } }
+
+.fs-mapa-marco{cursor:pointer}
+.fs-mapa-marco circle.halo{fill:rgba(212,167,44,.28); animation:fs-mapa-pulso 2.4s ease-in-out infinite; transform-origin:center}
+.fs-mapa-marco.hub circle.halo{fill:rgba(232,199,102,.35); animation-duration:2s}
+@keyframes fs-mapa-pulso{ 0%{ r:6; opacity:.8; } 100%{ r:16; opacity:0; } }
+.fs-mapa-marco circle.ponto{fill:var(--dourado); stroke:#0A1F33; stroke-width:1.6; transition:r .3s cubic-bezier(.34,1.56,.64,1), fill .3s ease}
+.fs-mapa-marco.hub circle.ponto{fill:#fff; r:7}
+.fs-mapa-marco:hover circle.ponto, .fs-mapa-marco.ativo circle.ponto{r:8.5; fill:#fff}
+.fs-mapa-marco text{font-size:8px; fill:rgba(255,255,255,.85); text-anchor:middle; pointer-events:none; font-family:'Space Grotesk',sans-serif; font-weight:600}
+
+.fs-mapa-info{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); border-radius:2px; clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px)); padding:28px 26px; min-height:280px; backdrop-filter:blur(6px)}
+.fs-mapa-info-vazio{text-align:center; padding:30px 10px; opacity:.7}
+.fs-mapa-info-ic{width:40px; height:40px; color:var(--dourado-claro); margin-bottom:14px}
+.fs-mapa-info-vazio p{color:rgba(255,255,255,.65); font-size:.9rem; line-height:1.6}
+.fs-mapa-info-conteudo .fs-mapa-info-cidade{font-family:'Space Grotesk',sans-serif; color:#fff; font-size:1.3rem; font-weight:700; margin-bottom:4px}
+.fs-mapa-info-conteudo .fs-mapa-info-qtd{display:inline-block; font-size:.72rem; font-weight:700; color:var(--tinta); background:var(--dourado-claro); padding:3px 11px; border-radius:100px; margin-bottom:18px}
+.fs-mapa-entidade-card{background:rgba(255,255,255,.05); border-left:3px solid var(--dourado); border-radius:6px; padding:14px 16px; margin-bottom:12px}
+.fs-mapa-entidade-card:last-child{margin-bottom:0}
+.fs-mapa-entidade-nome{color:#fff; font-size:.9rem; font-weight:700; margin-bottom:4px}
+.fs-mapa-entidade-pessoas{color:rgba(255,255,255,.72); font-size:.82rem; line-height:1.5}
+
+.fs-mapa-estaduais{margin-top:56px}
+.fs-mapa-estaduais h3{font-family:'Space Grotesk',sans-serif; color:#fff; font-size:1.15rem; margin-bottom:6px}
+.fs-mapa-estaduais-nota{color:rgba(255,255,255,.6); font-size:.85rem; margin-bottom:22px}
+.fs-mapa-estaduais-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+@media(max-width:900px){ .fs-mapa-estaduais-grid{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:600px){ .fs-mapa-estaduais-grid{grid-template-columns:1fr} }
+.fs-mapa-est-card{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:14px 16px; transition:.25s}
+.fs-mapa-est-card:hover{background:rgba(255,255,255,.09); border-color:rgba(212,167,44,.4); transform:translateY(-3px)}
+.fs-mapa-est-nome{color:var(--dourado-claro); font-size:.82rem; font-weight:700; margin-bottom:5px}
+.fs-mapa-est-pessoas{color:rgba(255,255,255,.68); font-size:.78rem; line-height:1.5}
+
 </style>
 </head>
 <body>
@@ -414,6 +461,7 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
       <a href="#diretoria">Diretoria</a>
       <a href="#legislacao">Legislação</a>
       <a href="#servicos">Associados</a>
+      <a href="#mapa">Mapa</a>
       <a href="#noticias">Notícias</a>
       <a href="#contato" class="btn btn-primario nav-cta">Fale conosco</a>
     </nav>
@@ -747,6 +795,56 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
   </div>
 </section>
 
+<!-- MAPA DA REDE DE ENTIDADES -->
+<section id="mapa" class="sec-escura fs-mapa-sec" style="position:relative; overflow:hidden">
+  <div class="fs-estrelas" id="fs-estrelas-mapa" aria-hidden="true"></div>
+  <div class="wrap" style="position:relative;z-index:1">
+    <div class="sec-head">
+      <span class="eyebrow" style="color:var(--dourado-claro)">Presença estadual</span>
+      <h2 style="color:#fff">O ForSUS <em style="color:var(--dourado-claro)">em Mato Grosso do Sul</em></h2>
+      <p style="color:rgba(255,255,255,.75)">Entidades, fóruns municipais e movimentos sociais organizados em rede por todo o Estado. Toque em um ponto do mapa para ver quem representa cada território.</p>
+    </div>
+
+    <div class="fs-mapa-layout">
+      <div class="fs-mapa-caixa" id="fs-mapa-caixa">
+        <svg class="fs-mapa-svg" id="fs-mapa-svg" viewBox="0 0 520 527" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="fs-grad-estado" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0B3D63"/>
+              <stop offset="55%" stop-color="#124E7E"/>
+              <stop offset="100%" stop-color="#0E7C4A"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Contorno real do Estado de Mato Grosso do Sul -->
+          <path class="fs-mapa-estado" d="M448.5,197.5 L449.3,198.9 L447.9,200.8 L450.0,205.0 L446.6,205.8 L443.6,213.6 L446.0,223.5 L444.9,226.7 L445.9,233.6 L442.9,241.8 L439.3,245.2 L428.0,248.7 L419.7,260.6 L415.2,264.3 L412.7,271.1 L413.5,281.0 L411.0,283.2 L407.9,283.7 L404.5,290.5 L400.0,292.4 L399.8,295.9 L401.5,299.8 L400.8,303.7 L395.2,312.9 L390.0,313.1 L388.6,315.0 L388.3,316.8 L390.9,320.9 L389.5,324.9 L385.1,328.0 L383.5,332.2 L377.3,338.2 L373.7,346.8 L368.0,352.9 L354.4,360.1 L348.5,365.6 L341.1,368.5 L336.8,372.1 L335.5,375.7 L331.6,380.9 L322.5,384.4 L312.4,390.7 L309.2,394.2 L307.8,396.8 L307.7,403.9 L302.7,414.7 L300.6,417.8 L289.5,422.7 L284.6,439.7 L283.4,449.9 L273.5,456.9 L271.8,453.4 L269.9,453.3 L266.9,450.7 L265.7,447.7 L262.3,446.0 L258.7,445.9 L257.8,444.0 L256.6,444.6 L253.4,442.4 L251.6,445.3 L248.7,444.9 L244.7,446.4 L244.0,447.7 L242.2,447.1 L240.1,448.6 L239.9,450.7 L236.2,450.5 L233.0,452.5 L230.5,450.9 L223.3,452.9 L219.8,450.8 L218.1,452.7 L214.2,450.7 L212.9,448.3 L213.3,437.1 L211.9,436.9 L210.9,432.9 L208.0,432.0 L208.6,428.7 L206.7,424.0 L209.6,418.0 L207.0,414.8 L207.1,412.5 L208.7,411.4 L207.5,409.2 L208.7,407.9 L207.7,405.7 L204.8,405.5 L201.2,388.6 L201.9,385.3 L203.8,383.9 L203.9,377.9 L196.9,368.9 L197.2,362.8 L194.8,362.6 L191.4,356.7 L172.7,356.4 L171.1,354.1 L167.1,353.1 L164.6,350.4 L163.1,345.0 L157.3,346.2 L154.4,351.9 L150.1,354.6 L150.4,355.6 L146.8,353.1 L145.9,355.5 L144.6,354.1 L143.0,355.4 L142.0,354.5 L141.4,356.8 L139.5,357.8 L137.3,354.7 L136.2,355.8 L131.4,353.4 L127.0,354.9 L125.4,354.3 L125.7,353.6 L121.7,354.0 L120.8,352.8 L118.6,354.9 L115.9,353.1 L114.5,354.5 L111.7,353.8 L111.0,352.3 L107.7,351.4 L101.0,350.7 L99.1,346.2 L94.2,346.0 L92.6,346.6 L92.3,348.5 L90.4,347.9 L89.1,349.3 L87.8,347.6 L84.9,348.2 L82.7,347.7 L82.0,345.7 L79.5,345.8 L78.6,342.7 L80.5,341.4 L82.1,336.5 L81.5,335.3 L83.4,334.1 L80.4,332.3 L83.3,329.2 L83.5,327.9 L81.6,326.4 L84.9,323.4 L82.3,321.3 L81.9,319.6 L83.3,317.9 L81.0,316.4 L80.5,314.3 L86.4,303.8 L86.5,302.7 L82.9,300.5 L86.6,297.1 L86.0,292.6 L86.9,290.4 L85.7,287.1 L88.4,283.7 L88.3,281.6 L85.9,281.8 L84.4,279.5 L82.5,279.1 L86.1,275.1 L84.5,273.2 L80.9,273.0 L82.3,270.6 L86.0,270.3 L83.0,266.0 L81.2,268.2 L79.6,268.1 L80.3,264.8 L78.1,263.1 L78.9,260.9 L77.8,257.5 L78.9,253.2 L74.4,249.6 L73.8,243.1 L70.3,243.5 L70.3,241.3 L72.4,239.7 L70.0,238.4 L74.1,234.8 L76.2,234.7 L77.4,232.1 L79.6,232.0 L80.9,230.0 L83.8,231.1 L86.2,227.1 L71.9,215.2 L90.1,174.6 L94.0,174.5 L94.8,173.3 L93.5,171.4 L93.5,167.1 L91.0,167.1 L102.0,130.1 L107.4,129.6 L101.1,124.1 L99.8,119.3 L93.4,107.0 L95.4,107.0 L95.4,105.9 L93.5,103.9 L94.0,101.5 L90.6,97.4 L89.5,92.0 L91.8,92.3 L93.0,90.3 L96.1,98.3 L95.3,100.7 L97.6,100.8 L99.6,105.7 L101.0,105.5 L103.2,108.5 L106.2,108.8 L107.5,111.2 L107.8,109.6 L111.4,106.9 L119.0,106.2 L118.0,105.1 L123.5,103.6 L125.2,104.4 L128.9,101.6 L133.4,94.9 L132.2,94.9 L132.2,93.1 L136.0,90.5 L137.7,90.5 L138.5,87.8 L140.4,86.3 L139.6,85.4 L140.7,84.8 L139.5,84.1 L140.2,82.6 L142.5,82.3 L145.2,78.0 L149.7,79.7 L149.7,78.4 L150.6,79.4 L156.1,78.6 L157.4,76.7 L160.4,79.2 L165.0,75.6 L166.1,76.9 L168.0,76.1 L170.5,72.9 L172.7,73.4 L174.0,71.2 L176.4,71.3 L177.8,70.0 L181.0,71.1 L181.3,70.2 L183.4,72.1 L183.1,74.0 L184.4,75.1 L186.2,74.7 L186.9,76.2 L187.6,75.1 L189.6,75.5 L188.8,76.0 L189.6,76.6 L190.3,75.7 L192.0,77.5 L193.8,77.3 L195.0,79.1 L199.4,80.5 L201.7,79.6 L202.3,80.7 L202.5,79.7 L205.4,81.6 L205.4,84.3 L208.7,87.6 L216.4,89.5 L217.8,91.4 L220.8,91.0 L224.5,95.2 L229.5,97.2 L230.4,96.0 L236.6,96.4 L239.1,94.8 L243.4,95.6 L248.8,92.3 L249.3,89.9 L258.1,86.9 L259.5,88.0 L263.4,88.0 L264.1,90.3 L268.5,92.7 L268.3,96.0 L271.0,97.7 L274.4,97.2 L279.2,94.4 L284.2,95.3 L286.6,87.9 L291.1,86.4 L295.0,81.7 L297.4,80.5 L298.0,77.1 L303.9,73.4 L305.4,74.8 L304.0,97.8 L298.8,98.3 L296.2,100.0 L291.3,108.6 L291.3,112.4 L295.9,112.3 L299.9,116.4 L304.7,117.4 L306.4,115.4 L308.8,115.5 L310.1,117.4 L316.3,118.9 L318.5,115.8 L321.1,117.2 L328.6,117.1 L331.9,119.0 L337.3,118.9 L333.5,121.3 L335.7,134.1 L337.4,135.9 L339.8,136.3 L343.7,133.3 L350.4,134.1 L353.7,136.2 L351.6,139.9 L347.7,140.7 L347.3,142.8 L343.0,147.0 L345.4,152.5 L354.2,155.4 L362.4,155.3 L364.5,153.5 L370.0,155.4 L376.0,163.1 L384.0,164.2 L385.3,166.5 L387.7,167.1 L389.2,170.0 L391.1,169.9 L392.7,171.8 L396.6,170.9 L401.1,175.6 L411.5,180.4 L415.7,179.9 L423.9,182.1 L426.6,185.1 L429.8,185.0 L432.7,188.1 L435.3,187.3 L441.4,190.0 L445.0,194.2 L444.4,195.2 Z" />
+
+          <!-- Linhas de rede conectando Campo Grande (sede) aos municipios -->
+          <g id="fs-mapa-linhas"></g>
+
+          <!-- Marcadores de municipios (gerados via JS a partir dos dados) -->
+          <g id="fs-mapa-marcadores"></g>
+        </svg>
+        <p class="fs-mapa-instrucao">Toque ou passe o mouse sobre os pontos dourados</p>
+      </div>
+
+      <div class="fs-mapa-info" id="fs-mapa-info">
+        <div class="fs-mapa-info-vazio" id="fs-mapa-info-vazio">
+          <svg class="fs-mapa-info-ic"><use href="#ic-predios"/></svg>
+          <p>Selecione um município no mapa para ver as entidades e representantes do ForSUS naquele território.</p>
+        </div>
+        <div class="fs-mapa-info-conteudo" id="fs-mapa-info-conteudo" style="display:none"></div>
+      </div>
+    </div>
+
+    <div class="fs-mapa-estaduais">
+      <h3>Entidades de abrangência estadual</h3>
+      <p class="fs-mapa-estaduais-nota">Organizações sediadas em Campo Grande, com atuação em todo o território de Mato Grosso do Sul.</p>
+      <div class="fs-mapa-estaduais-grid" id="fs-mapa-estaduais-grid"></div>
+    </div>
+  </div>
+</section>
+
 <!-- NOTICIAS -->
 <section id="noticias" class="tex-fundo-claro">
   <div class="wrap">
@@ -1009,6 +1107,174 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
 
     // ===== PARTICULAS 3D DO HERO (removido: substituido pela Rede de Vozes acima) =====
     // ===== FAIXA 3D DE OCTAEDROS (removida: substituida pelo Divisor Diagonal, puro CSS) =====
+
+
+  // ============================================================
+  // MAPA DA REDE DE ENTIDADES — dados reais da Lista de Presenca do ForSUS/MS
+  // ============================================================
+  try{
+    var HUB = "Campo Grande";
+    var municipiosForSUS = [
+      {nome:"Jardim", x:176.1, y:282.6, entidades:[
+        {nome:"Fórum de Jardim/MS", pessoas:"Ada Maria da C. R. Venturini"},
+        {nome:"Associação Brasileira de Redução de Danos — ABORDA", pessoas:"Cleonice Alves de Albres"}
+      ]},
+      {nome:"Rio Verde de Mato Grosso", x:244.9, y:136.8, entidades:[
+        {nome:"Movimento Social de Usuários do SUS", pessoas:"Helenair Francisca Carvalho, Elaine Spies Nicolau da Silva"}
+      ]},
+      {nome:"Ponta Porã", x:198.1, y:351.2, entidades:[
+        {nome:"Fórum Municipal de Ponta Porã", pessoas:"Edgar Fernando do Nascimento Batista"}
+      ]},
+      {nome:"Vicentina", x:265.5, y:355.0, entidades:[
+        {nome:"Fórum Municipal de Vicentina / Pastoral do Idoso", pessoas:"Francisco Antonio de Souza, Maria de Lourdes"}
+      ]},
+      {nome:"Sidrolândia", x:238.0, y:259.2, entidades:[
+        {nome:"Fórum Municipal de Sidrolândia", pessoas:"Pedro Macedo Granja, José Pereira Leite"}
+      ]},
+      {nome:"Brasilândia", x:373.7, y:302.2, entidades:[
+        {nome:"Instituto Cisalpina de Pesquisa, Educação Socioambiental e Defesa do Patrimônio Cultural", pessoas:"Jair Bezerra Xavier"}
+      ]},
+      {nome:"Corumbá", x:97.6, y:117.1, entidades:[
+        {nome:"Fórum Municipal de Corumbá", pessoas:"Marcela Fardin Montenegro, Léia Vilalva de Moraes"},
+        {nome:"FENASAMBA de Corumbá", pessoas:""}
+      ]},
+      {nome:"Dourados", x:246.4, y:340.1, entidades:[
+        {nome:"Fórum Municipal de Dourados", pessoas:"Maria Aparecida Palmeira"},
+        {nome:"Associação Combate ao Câncer da Região da Grande Dourados", pessoas:"Emilene Maria de Paula"}
+      ]},
+      {nome:"Paranaíba", x:436.1, y:215.4, entidades:[
+        {nome:"Fórum de Paranaíba", pessoas:"Maria Aparecida Queiroz Mariano"}
+      ]},
+      {nome:"Naviraí", x:278.5, y:397.3, entidades:[
+        {nome:"Fórum Municipal de Naviraí / Abrigo São José", pessoas:"Dalmo Freitas Barbosa"}
+      ]},
+      {nome:"Aquidauana", x:195.3, y:223.5, entidades:[
+        {nome:"Fórum Municipal de Aquidauana", pessoas:"Evanilson Campos Gonçalves"}
+      ]},
+      {nome:"Três Lagoas", x:409.2, y:279.3, entidades:[
+        {nome:"Fórum de Três Lagoas", pessoas:"Edma Aranha Silva, Neuza Aparecida de Figueiredo"}
+      ]},
+      {nome:"Campo Grande", x:256.4, y:234.0, hub:true, entidades:[
+        {nome:"Fórum Campo Grande/MS", pessoas:""},
+        {nome:"Federação de Aposentados e Pensionistas de MS — FAPEMS", pessoas:"Maria do Socorro Evangelista de Souza, Alcides dos Santos Ribeiro"},
+        {nome:"Grupo Iguais MS", pessoas:"Sebastião de Campos Arinos Junior, Robson Barros Pereira, Deise Cristina Silva Camargo, Nuilena Elizabeth dos Santos Silva"},
+        {nome:"Federação dos Povos e Organizações Indígenas de MS", pessoas:"Ronaldo Osório dos Santos, Germano Coelho Ramos"},
+        {nome:"FETEMS", pessoas:"Edvaldo Vieira"}
+      ]},
+    ];
+
+    var entidadesEstaduais = [
+      {nome:"ACODFAL-MS — Portadores de Doenças Falciformes", pessoas:"Lucinda do Rosário, Davi Vital"},
+      {nome:"Instituto Cultural Dandara — Quilombola", pessoas:"Adriane da Silva Soares"},
+      {nome:"Águia Morena / ABORDA", pessoas:"Edna Flores, Antônio Elias das Neves Ferreira de Morais"},
+      {nome:"Associação dos Ostomizados/MS", pessoas:"Lana Maria Flores da Costa, Rosângela de Oliveira"},
+      {nome:"Pastoral da Criança", pessoas:"Maria Antônia Conceição de Souza Kuending, Ordalino Martins da Cunha"},
+      {nome:"ASMFC/MS — Fibrose Cística", pessoas:"Heindnea da Silva Masselinka, Nelcila da Silva Masselink"},
+      {nome:"Igreja Episcopal Anglicana do Brasil — IEAB", pessoas:"Cleide Martins Queiroz"},
+      {nome:"AMDEF-MS — Mulheres com Deficiência", pessoas:"Raquel Corrêa Gomes, Mirian Mirela Ribeiro Holanda"},
+      {nome:"Associação de Mulheres Voluntárias Sul-Mato-Grossenses", pessoas:"Neuza Socorro da Silva, Eliane Luiz Canhete Malves"},
+      {nome:"Comissão Regional de Justiça e Paz — CRJP-MS", pessoas:"Rosilda Ribeiro Rodrigues Salomão, Thiago da Silva Godoy"},
+      {nome:"Federação de Associações de Moradores de MS — FAMEMS", pessoas:"Elias Rodrigues Santana, Maria Noemi Ferreira, Edson Maidana Nunes"},
+      {nome:"PRODTEA — Pessoas com Transtorno do Espectro Autista", pessoas:"Naína Caroline Hernandez Dibo, Monica Fuentes Luz"},
+      {nome:"Movimento Espírita São Francisco de Assis — MEFA-MS", pessoas:"Wandely Soares Peixoto, Kamila Ribeiro da Rocha"},
+      {nome:"Rede de Redutores de Danos — REDSUL", pessoas:"Alice Terezinha Both, Victor Hugo Both"},
+      {nome:"RAESP — Rede de Egressos do Sistema Prisional", pessoas:"Douglas Barros de Figueiredo, Jônya Lucia Trotte Couto, Kedney Graico Araujo da Consolação"},
+      {nome:"Associação dos Descendentes de Tia Eva — Quilombola", pessoas:"Ronaldo Jeferson Tacos"},
+      {nome:"Pastoral da Saúde/MS", pessoas:""},
+    ];
+
+    var svgMapa = document.getElementById('fs-mapa-svg');
+    var gMarcadores = document.getElementById('fs-mapa-marcadores');
+    var gLinhas = document.getElementById('fs-mapa-linhas');
+    var painelVazio = document.getElementById('fs-mapa-info-vazio');
+    var painelConteudo = document.getElementById('fs-mapa-info-conteudo');
+    var gridEstaduais = document.getElementById('fs-mapa-estaduais-grid');
+
+    if (svgMapa && gMarcadores){
+      var svgNS = 'http://www.w3.org/2000/svg';
+      var hubData = municipiosForSUS.find(function(m){ return m.hub; });
+
+      // desenhar linhas de rede (hub -> cada municipio)
+      municipiosForSUS.forEach(function(m){
+        if (m.hub) return;
+        var linha = document.createElementNS(svgNS, 'path');
+        var mx = (hubData.x + m.x) / 2, my = (hubData.y + m.y) / 2 - 18;
+        linha.setAttribute('d', 'M' + hubData.x + ',' + hubData.y + ' Q' + mx + ',' + my + ' ' + m.x + ',' + m.y);
+        linha.setAttribute('class', 'fs-mapa-linha-rede');
+        linha.setAttribute('data-municipio', m.nome);
+        gLinhas.appendChild(linha);
+      });
+
+      // desenhar marcadores
+      municipiosForSUS.forEach(function(m){
+        var g = document.createElementNS(svgNS, 'g');
+        g.setAttribute('class', 'fs-mapa-marco' + (m.hub ? ' hub' : ''));
+        g.setAttribute('data-municipio', m.nome);
+
+        var halo = document.createElementNS(svgNS, 'circle');
+        halo.setAttribute('class', 'halo'); halo.setAttribute('cx', m.x); halo.setAttribute('cy', m.y); halo.setAttribute('r', 9);
+        var ponto = document.createElementNS(svgNS, 'circle');
+        ponto.setAttribute('class', 'ponto'); ponto.setAttribute('cx', m.x); ponto.setAttribute('cy', m.y); ponto.setAttribute('r', m.hub ? 7 : 5);
+
+        g.appendChild(halo); g.appendChild(ponto);
+
+        function ativarMunicipio(){
+          document.querySelectorAll('.fs-mapa-marco').forEach(function(el){ el.classList.remove('ativo'); });
+          document.querySelectorAll('.fs-mapa-linha-rede').forEach(function(el){ el.classList.remove('ativa'); });
+          g.classList.add('ativo');
+          var linhaAssociada = gLinhas.querySelector('[data-municipio="' + m.nome + '"]');
+          if (linhaAssociada) linhaAssociada.classList.add('ativa');
+          mostrarInfoMunicipio(m);
+        }
+        g.addEventListener('click', ativarMunicipio);
+        g.addEventListener('mouseenter', ativarMunicipio);
+
+        gMarcadores.appendChild(g);
+      });
+
+      function mostrarInfoMunicipio(m){
+        if (painelVazio) painelVazio.style.display = 'none';
+        if (!painelConteudo) return;
+        painelConteudo.style.display = 'block';
+        var html = '<div class="fs-mapa-info-cidade">' + m.nome + '</div>';
+        html += '<span class="fs-mapa-info-qtd">' + m.entidades.length + (m.entidades.length===1 ? ' entidade' : ' entidades') + '</span>';
+        m.entidades.forEach(function(e){
+          html += '<div class="fs-mapa-entidade-card"><div class="fs-mapa-entidade-nome">' + e.nome + '</div>';
+          if (e.pessoas) html += '<div class="fs-mapa-entidade-pessoas">' + e.pessoas + '</div>';
+          html += '</div>';
+        });
+        painelConteudo.innerHTML = html;
+      }
+
+      // efeito 3D: o mapa inclina levemente seguindo o mouse
+      var caixaMapa = document.getElementById('fs-mapa-caixa');
+      if (caixaMapa && matchMedia('(hover:hover) and (pointer:fine)').matches){
+        caixaMapa.addEventListener('mousemove', function(e){
+          var r = caixaMapa.getBoundingClientRect();
+          var cx = ((e.clientX - r.left)/r.width - .5) * 10;
+          var cy = ((e.clientY - r.top)/r.height - .5) * -10;
+          svgMapa.style.transform = 'rotateX(' + cy + 'deg) rotateY(' + cx + 'deg)';
+        });
+        caixaMapa.addEventListener('mouseleave', function(){ svgMapa.style.transform = ''; });
+      }
+
+      // ativar Campo Grande por padrao ao carregar
+      setTimeout(function(){
+        var marcoHub = gMarcadores.querySelector('[data-municipio="Campo Grande"]');
+        if (marcoHub) marcoHub.dispatchEvent(new Event('mouseenter'));
+      }, 900);
+    }
+
+    // grade de entidades estaduais
+    if (gridEstaduais){
+      entidadesEstaduais.forEach(function(e){
+        var card = document.createElement('div');
+        card.className = 'fs-mapa-est-card';
+        card.innerHTML = '<div class="fs-mapa-est-nome">' + e.nome + '</div>' + (e.pessoas ? '<div class="fs-mapa-est-pessoas">' + e.pessoas + '</div>' : '');
+        gridEstaduais.appendChild(card);
+      });
+    }
+  }catch(e){}
 
   // Campo de estrelas da secao Diretoria
   try{
