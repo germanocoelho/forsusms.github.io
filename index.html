@@ -744,41 +744,121 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
     });
   }
 
-  // ===== PARTICULAS 3D DO HERO =====
-  if (window.THREE){
-    try{
-      var canvasHero = document.getElementById('fs-particulas');
-      var scene = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera(60, canvasHero.clientWidth/canvasHero.clientHeight, .1, 1000);
-      camera.position.z = 60;
-      var renderer = new THREE.WebGLRenderer({canvas:canvasHero, alpha:true, antialias:!telaEstreita});
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, telaEstreita?1.5:2));
+  // ===== REDE DE VOZES: hero em canvas 2D puro, independente do Three.js =====
+  try{
+    var canvasHero = document.getElementById('fs-particulas');
+    var ctxHero = canvasHero.getContext('2d');
+    var dprHero = Math.min(window.devicePixelRatio || 1, telaEstreita ? 1.5 : 2);
+
       function ajustarTamanhoHero(){
         var w = canvasHero.clientWidth, h = canvasHero.clientHeight;
-        renderer.setSize(w, h, false);
-        camera.aspect = w/h; camera.updateProjectionMatrix();
+        canvasHero.width = w * dprHero; canvasHero.height = h * dprHero;
+        ctxHero.setTransform(dprHero, 0, 0, dprHero, 0, 0);
       }
       ajustarTamanhoHero();
       window.addEventListener('resize', ajustarTamanhoHero);
 
-      var cores = [0xD4A72C, 0x3FAE72, 0x2E7DB8, 0xE8C766];
-      var totalContas = telaEstreita ? 22 : 46;
-      var grupo = new THREE.Group();
-      for (var i=0;i<totalContas;i++){
-        var fase = i/totalContas;
-        var y = 1 - (fase*2);
-        var raio = Math.sqrt(1-y*y);
-        var theta = fase * Math.PI * 2 * 5;
-        var x = Math.cos(theta)*raio, z = Math.sin(theta)*raio;
-        var geo = new THREE.SphereGeometry(.9 + Math.random()*.6, 10, 10);
-        var mat = new THREE.MeshStandardMaterial({color:cores[i%cores.length], emissive:cores[i%cores.length], emissiveIntensity:.35, roughness:.4});
-        var esfera = new THREE.Mesh(geo, mat);
-        esfera.position.set(x*30, y*22, z*30);
-        grupo.add(esfera);
+      // ===== REDE DE VOZES: nos que representam entidades/foruns, conectados
+      // por pulsos de dados que viajam entre eles quando proximos =====
+      var coresRede = ['#2E7DB8', '#3FAE72', '#D4A72C', '#0B3D63', '#0E7C4A'];
+      var totalNos = telaEstreita ? 22 : 42;
+      var nos = [];
+      function criarNo(w, h){
+        return {
+          x: Math.random()*w,
+          y: Math.random()*h,
+          vx: (Math.random()-0.5)*0.12,
+          vy: (Math.random()-0.5)*0.12,
+          raio: 2.2 + Math.random()*2.4,
+          cor: coresRede[Math.floor(Math.random()*coresRede.length)],
+          faseP: Math.random()*Math.PI*2
+        };
       }
-      scene.add(grupo);
-      scene.add(new THREE.AmbientLight(0xffffff, .7));
-      var luz = new THREE.DirectionalLight(0xffffff, .9); luz.position.set(4,8,10); scene.add(luz);
+      var pulsos = []; // pulsos de dados viajando entre dois nos conectados
+
+      function inicializarRede(){
+        var w = canvasHero.clientWidth, h = canvasHero.clientHeight;
+        nos = [];
+        for (var i=0;i<totalNos;i++){ nos.push(criarNo(w,h)); }
+      }
+      inicializarRede();
+      window.addEventListener('resize', inicializarRede);
+
+      var DIST_CONEXAO = telaEstreita ? 140 : 190;
+      var tempoRede = 0;
+
+      function atualizarERenderizarRede(w, h){
+        ctxHero.clearRect(0,0,w,h);
+        tempoRede += 1;
+
+        // mover nos suavemente, refletindo nas bordas
+        for (var i=0;i<nos.length;i++){
+          var n = nos[i];
+          if (!reduzMovimento){
+            n.x += n.vx; n.y += n.vy;
+            if (n.x < 0 || n.x > w) n.vx *= -1;
+            if (n.y < 0 || n.y > h) n.vy *= -1;
+          }
+        }
+
+        // desenhar conexoes entre nos proximos
+        for (var a=0;a<nos.length;a++){
+          for (var b=a+1;b<nos.length;b++){
+            var dx = nos[a].x-nos[b].x, dy = nos[a].y-nos[b].y;
+            var dist = Math.sqrt(dx*dx+dy*dy);
+            if (dist < DIST_CONEXAO){
+              var alpha = (1 - dist/DIST_CONEXAO) * 0.35;
+              ctxHero.strokeStyle = 'rgba(212,167,44,' + alpha.toFixed(3) + ')';
+              ctxHero.lineWidth = 1;
+              ctxHero.beginPath();
+              ctxHero.moveTo(nos[a].x, nos[a].y);
+              ctxHero.lineTo(nos[b].x, nos[b].y);
+              ctxHero.stroke();
+
+              // ocasionalmente, disparar um pulso de dado viajando nessa conexao
+              if (!reduzMovimento && Math.random() < 0.006){
+                pulsos.push({de:nos[a], para:nos[b], t:0, cor: nos[a].cor});
+              }
+            }
+          }
+        }
+
+        // atualizar e desenhar pulsos de dados
+        for (var p=pulsos.length-1; p>=0; p--){
+          var pu = pulsos[p];
+          pu.t += 0.02;
+          if (pu.t >= 1){ pulsos.splice(p,1); continue; }
+          var px = pu.de.x + (pu.para.x-pu.de.x)*pu.t;
+          var py = pu.de.y + (pu.para.y-pu.de.y)*pu.t;
+          var brilho = Math.sin(pu.t*Math.PI);
+          ctxHero.beginPath();
+          ctxHero.arc(px, py, 2.4*brilho+0.6, 0, Math.PI*2);
+          ctxHero.fillStyle = pu.cor;
+          ctxHero.globalAlpha = brilho;
+          ctxHero.fill();
+          ctxHero.globalAlpha = 1;
+        }
+
+        // desenhar nos com pulso suave de escala/brilho
+        for (var k=0;k<nos.length;k++){
+          var no = nos[k];
+          var pulso = reduzMovimento ? 1 : (0.75 + 0.25*Math.sin(tempoRede*0.03 + no.faseP));
+          ctxHero.beginPath();
+          ctxHero.arc(no.x, no.y, no.raio*pulso, 0, Math.PI*2);
+          ctxHero.fillStyle = no.cor;
+          ctxHero.globalAlpha = 0.85;
+          ctxHero.fill();
+          ctxHero.globalAlpha = 1;
+          // halo suave
+          ctxHero.beginPath();
+          ctxHero.arc(no.x, no.y, no.raio*pulso*2.6, 0, Math.PI*2);
+          var grad = ctxHero.createRadialGradient(no.x,no.y,0,no.x,no.y,no.raio*pulso*2.6);
+          grad.addColorStop(0, no.cor + '55');
+          grad.addColorStop(1, no.cor + '00');
+          ctxHero.fillStyle = grad;
+          ctxHero.fill();
+        }
+      }
 
       var visivel = true;
       if ('IntersectionObserver' in window){
@@ -787,14 +867,16 @@ footer{background:#061826; padding:70px 0 0; color:rgba(255,255,255,.85)}
       function animarHero(){
         requestAnimationFrame(animarHero);
         if (visivel){
-          if (!reduzMovimento) grupo.rotation.y += .0016;
-          renderer.render(scene, camera);
+          atualizarERenderizarRede(canvasHero.clientWidth, canvasHero.clientHeight);
         }
       }
       animarHero();
     }catch(e){}
 
+    // ===== PARTICULAS 3D DO HERO (removido: substituido pela Rede de Vozes acima) =====
+
     // ===== FAIXA 3D DIVISORIA (octaedros) =====
+    if (window.THREE){
     try{
       var canvasFaixa = document.getElementById('fs-faixa3d');
       var scene2 = new THREE.Scene();
